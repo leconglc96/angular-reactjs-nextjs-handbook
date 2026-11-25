@@ -1,0 +1,3010 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Angular · React · Next.js — Cẩm nang Front-end</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f6f7f4;
+  --surf: #fff;
+  --ink: #1b2320;
+  --mut: #5d6a64;
+  --line: #d9ded9;
+  --code: #eef1ec;
+  --ang: #c4283c;
+  --rea: #0a7f9b;
+  --nxt: #222;
+  --cmp: #6a4bc4;
+  --gen: #0f766e;
+  --net: #0f766e;
+  --jst: #b45309;
+  --prf: #2563eb;
+  --ops: #be185d;
+  --acc: var(--ang);
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121715;
+    --surf: #1b2220;
+    --ink: #e8eee9;
+    --mut: #9aa8a1;
+    --line: #2d3833;
+    --code: #0e1311;
+    --ang: #ff6b7d;
+    --rea: #4fd1ee;
+    --nxt: #f1f1f1;
+    --cmp: #a994ff;
+    --gen: #2dd4bf;
+    --net: #34d399;
+    --jst: #fbbf24;
+    --prf: #60a5fa;
+    --ops: #f472b6;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121715;
+  --surf: #1b2220;
+  --ink: #e8eee9;
+  --mut: #9aa8a1;
+  --line: #2d3833;
+  --code: #0e1311;
+  --ang: #ff6b7d;
+  --rea: #4fd1ee;
+  --nxt: #f1f1f1;
+  --cmp: #a994ff;
+  --gen: #2dd4bf;
+  --net: #34d399;
+  --jst: #fbbf24;
+  --prf: #60a5fa;
+  --ops: #f472b6;
+  color-scheme: dark;
+}
+html {
+  scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 124px);
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 16px/1.65 "Be Vietnam Pro", system-ui, -apple-system, sans-serif;
+}
+.sticky-top {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: var(--bg);
+  padding-top: env(safe-area-inset-top, 0px);
+  border-bottom: 1px solid var(--line);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px clamp(16px, 4vw, 48px) 8px;
+  max-width: 1160px;
+  margin: auto;
+}
+h1 {
+  font-size: clamp(1.35rem, 3.2vw, 1.95rem);
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+.ctl {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+button {
+  font: inherit;
+  cursor: pointer;
+  color: var(--ink);
+  background: var(--surf);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 6px 12px;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+button:hover {
+  border-color: var(--acc);
+}
+button:focus-visible {
+  outline: 2px solid var(--acc);
+  outline-offset: 2px;
+}
+button[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--bg);
+  border-color: var(--ink);
+}
+nav {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  max-width: 1160px;
+  margin: 4px auto 0;
+  padding: 0 clamp(16px, 4vw, 48px);
+  scrollbar-width: thin;
+}
+nav button {
+  border: 0;
+  border-bottom: 3px solid transparent;
+  border-radius: 0;
+  background: none;
+  padding: 10px 14px;
+  white-space: nowrap;
+  font-weight: 500;
+  color: var(--mut);
+}
+nav button:hover {
+  color: var(--ink);
+}
+nav button.on {
+  color: var(--ink);
+  border-bottom-color: var(--acc);
+  font-weight: 700;
+}
+main {
+  max-width: 1160px;
+  margin: auto;
+  padding: 24px clamp(16px, 4vw, 48px) 72px;
+}
+h2 {
+  font-size: 1.45rem;
+  margin: 40px 0 12px;
+  padding-left: 12px;
+  border-left: 4px solid var(--acc);
+}
+main > h2:first-child {
+  margin-top: 8px;
+}
+h3 {
+  margin: 0 0 8px;
+  font-size: 1.06rem;
+}
+.lead {
+  font-size: 1.05rem;
+  max-width: 78ch;
+  margin: 0 0 12px;
+}
+.lvl {
+  margin: 24px 0 10px;
+  font-weight: 700;
+  color: var(--acc);
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr));
+  gap: 16px;
+}
+.card {
+  background: var(--surf);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 16px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.card p {
+  margin: 0 0 10px;
+  color: var(--mut);
+  font-size: 0.94rem;
+}
+.card p b {
+  color: var(--ink);
+}
+pre {
+  margin: 0;
+  background: var(--code);
+  border-radius: 8px;
+  padding: 12px;
+  overflow-x: auto;
+  font: 13px/1.55 "Fira Code", ui-monospace, monospace;
+  border: 1px solid var(--line);
+}
+.flow {
+  max-width: 820px;
+}
+.bd {
+  display: inline-block;
+  font-size: 0.74rem;
+  border: 1px solid var(--acc);
+  color: var(--acc);
+  border-radius: 20px;
+  padding: 1px 8px;
+  margin-left: 8px;
+  font-weight: 500;
+  vertical-align: middle;
+}
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  margin: 0 0 16px;
+  font-size: 0.84rem;
+}
+.chip {
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--lc, var(--acc));
+  border-radius: 6px;
+  padding: 3px 8px;
+  background: var(--surf);
+}
+.lg {
+  font-size: 0.82rem;
+  color: var(--mut);
+  margin-bottom: 8px;
+}
+.br {
+  margin: 0;
+  padding: 12px 14px;
+  border: 2px dashed var(--acc);
+  border-radius: 10px;
+  background: var(--surf);
+}
+.br > b {
+  display: block;
+  margin-bottom: 8px;
+}
+.br .cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 8px;
+}
+.br .cols div {
+  background: var(--code);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 0.9rem;
+}
+.br .cols b {
+  display: block;
+  color: var(--acc);
+  margin-bottom: 2px;
+}
+.tbl {
+  overflow-x: auto;
+  margin: 10px 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+.tree {
+  background: var(--surf);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px 16px;
+  overflow-x: auto;
+}
+.tr {
+  display: flex;
+  gap: 16px;
+  padding: 3px 0;
+  min-width: 620px;
+  border-bottom: 1px dashed rgba(128, 128, 128, 0.14);
+}
+.tr:last-child {
+  border-bottom: 0;
+}
+.tr code {
+  font: 13px/1.5 "Fira Code", monospace;
+  flex: 0 0 290px;
+  white-space: pre;
+  color: var(--ink);
+}
+.tr span {
+  color: var(--mut);
+  font-size: 0.9rem;
+}
+.tn {
+  margin: 0 0 12px;
+  color: var(--mut);
+}
+.dg {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: center;
+  margin: 4px 0 12px;
+  font-size: 0.79rem;
+}
+.dg span {
+  border: 1px solid var(--acc);
+  border-radius: 6px;
+  padding: 2px 8px;
+  background: var(--code);
+  color: var(--ink);
+}
+.dg i {
+  color: var(--acc);
+  font-style: normal;
+  font-weight: 700;
+}
+.tbl table {
+  min-width: 420px;
+  font-size: 0.82rem;
+}
+.tbl th,
+.tbl td {
+  padding: 6px 8px;
+}
+.step pre {
+  margin-top: 8px;
+}
+.ty {
+  margin: 10px 0;
+  padding: 10px 12px;
+  background: var(--code);
+  border-radius: 8px;
+  border-left: 3px solid var(--acc);
+}
+.ty p {
+  margin: 0 0 8px;
+  font-size: 0.88rem;
+}
+.ty p:last-child {
+  margin: 0;
+}
+.ty code {
+  display: block;
+  margin-top: 4px;
+  font: 12px/1.5 "Fira Code", monospace;
+  white-space: pre-wrap;
+  color: var(--ink);
+}
+.step em {
+  display: block;
+  margin-top: 8px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 0.85rem;
+}
+.step {
+  background: var(--surf);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--acc);
+  border-radius: 8px;
+  padding: 12px 16px;
+}
+.step b {
+  display: block;
+}
+.step span {
+  color: var(--mut);
+  font-size: 0.93rem;
+}
+.arr {
+  text-align: center;
+  color: var(--acc);
+  font-size: 1.3rem;
+  line-height: 1.3;
+}
+.tw {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surf);
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 720px;
+  font-size: 0.92rem;
+}
+th,
+td {
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+th {
+  font-weight: 700;
+  background: var(--code);
+}
+td:first-child {
+  font-weight: 600;
+  color: var(--mut);
+}
+.note-box {
+  margin-top: 16px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--surf);
+  font-size: 0.92rem;
+  color: var(--mut);
+}
+.note-box b {
+  color: var(--ink);
+}
+@media (max-width: 640px) {
+  .tr {
+    min-width: 520px;
+  }
+  .tr code {
+    flex: 0 0 220px;
+    font-size: 12px;
+  }
+}
+</style>
+</head>
+<body>
+<div class="sticky-top">
+  <header>
+    <h1 id="ttl"></h1>
+    <div class="ctl">
+      <button id="lv" type="button" aria-pressed="false">VI</button>
+      <button id="le" type="button" aria-pressed="false">EN</button>
+      <button id="th" type="button" aria-label="Theme"></button>
+    </div>
+  </header>
+  <nav id="nav" role="tablist" aria-label="Sections"></nav>
+</div>
+<main id="out"></main>
+
+<script>
+// Application state: language (0 = Vietnamese, 1 = English) and active tab
+var L = 0;
+var TAB = "angular";
+var root = document.documentElement;
+
+/**
+ * Resolve bilingual array [vi, en] or single string.
+ */
+function t(x) {
+  return Array.isArray(x) ? x[L] : x;
+}
+
+/**
+ * Safely write key/value to localStorage.
+ */
+function store(k, v) {
+  try {
+    localStorage.setItem(k, v);
+  } catch (e) {
+    // Ignore storage errors in restricted environments
+  }
+}
+
+/**
+ * Safely read key from localStorage.
+ */
+function load(k) {
+  try {
+    return localStorage.getItem(k);
+  } catch (e) {
+    return null;
+  }
+}
+
+/**
+ * Escape HTML special characters before inserting into markup.
+ */
+function esc(s) {
+  return String(s == null ? "" : s)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+/**
+ * Create a DOM element with optional className and innerHTML.
+ */
+function el(tag, cls, html) {
+  var e = document.createElement(tag);
+  if (cls) e.className = cls;
+  if (html != null) e.innerHTML = html;
+  return e;
+}
+
+var UI = {
+  title: [
+    "Angular · React · Next.js — Cẩm nang Front-end",
+    "Angular · React · Next.js — Front-end Guide"
+  ],
+  c: ["Khái niệm", "Concept"],
+  k: ["Kiến thức từ cơ bản đến nâng cao", "Knowledge: basic to advanced"],
+  f: ["Cách thức hoạt động (từng bước)", "How it works (step by step)"],
+  tabs: {
+    angular: "Angular",
+    react: "ReactJS",
+    next: "Next.js",
+    compare: ["So sánh", "Compare"],
+    general: ["Kiến thức chung", "General"]
+  }
+};
+
+var LC = {
+  Build: "#b7791f",
+  Server: "#7c5cd6",
+  Browser: "#0a8aa8",
+  Network: "#2f9e63"
+};
+
+/**
+ * Resolve lane color for a given execution stage label.
+ */
+function lane(s) {
+  return LC[(s || "").split(" ")[0]] || "#888";
+}
+
+/**
+ * Render an optional comparison mini-table inside a knowledge card.
+ */
+function tbf(c) {
+  if (!c || !Array.isArray(c.h) || !Array.isArray(c.r)) return "";
+  return (
+    "<div class=\"tbl\"><table><thead><tr>" +
+    c.h
+      .map(function (h) {
+        return "<th>" + esc(t(h)) + "</th>";
+      })
+      .join("") +
+    "</tr></thead><tbody>" +
+    c.r
+      .map(function (r) {
+        return (
+          "<tr>" +
+          r
+            .map(function (x, k) {
+              return k ? "<td>" + esc(t(x)) + "</td>" : "<td><b>" + esc(t(x)) + "</b></td>";
+            })
+            .join("") +
+          "</tr>"
+        );
+      })
+      .join("") +
+    "</tbody></table></div>"
+  );
+}
+
+var FW = {
+  angular: {
+    col: "--ang",
+    c: [
+      "Angular là framework front-end đầy đủ do Google phát triển, viết bằng TypeScript. Nó cung cấp sẵn kiến trúc cho ứng dụng quy mô lớn: standalone component (mặc định từ Angular hiện đại), Signals, routing, reactive forms, HTTP client + interceptor, dependency injection và CLI. Mỗi component gồm lớp TypeScript, template HTML và style riêng biệt.",
+      "Angular is a full-featured front-end framework from Google written in TypeScript. It provides an architecture for large applications: standalone components (the modern default), Signals, routing, reactive forms, an HTTP client with interceptors, dependency injection and a CLI. Each component pairs a TypeScript class, an HTML template and scoped styles."
+    ],
+    lv: [
+      { l: ["Cơ bản", "Basic"], i: [] },
+      { l: ["Trung cấp", "Intermediate"], i: [] },
+      { l: ["Nâng cao", "Advanced"], i: [] }
+    ],
+    fl: [
+      {
+        n: "main.ts → bootstrapApplication()",
+        d: [
+          "Điểm khởi động: trình duyệt tải bundle, Angular khởi tạo ứng dụng standalone và nạp root component cùng các provider (DI).",
+          "Entry point: the browser loads the bundle and Angular boots the standalone app with the root component and its DI providers."
+        ]
+      },
+      {
+        n: "Compile (AOT)",
+        d: [
+          "Khi build, template được biên dịch Ahead-of-Time thành mã JavaScript tối ưu, giúp chạy nhanh, giảm kích thước runtime và bắt lỗi template sớm.",
+          "At build time, templates are Ahead-of-Time compiled into optimized JavaScript, improving runtime speed and catching template errors early."
+        ]
+      },
+      {
+        n: "Router & Guards",
+        d: [
+          "Router đọc URL, đánh giá guard/resolver, tải lazy route chunk nếu cần và chọn component khớp.",
+          "The router reads the URL, evaluates guards/resolvers, fetches lazy route chunks if needed and selects the matching component."
+        ]
+      },
+      {
+        n: "Component + DI",
+        d: [
+          "Angular tạo component, inject các service/token cần thiết và render template lần đầu.",
+          "Angular creates the component, injects required services or tokens and renders the initial template."
+        ]
+      },
+      {
+        n: "Change Detection / Signals",
+        d: [
+          "Khi có sự kiện, HTTP response hoặc Signal thay đổi, Angular kiểm tra binding bị ảnh hưởng theo chiến lược Default, OnPush hoặc Zoneless.",
+          "When events fire, HTTP responses arrive or Signals update, Angular checks affected bindings under Default, OnPush or Zoneless detection."
+        ]
+      },
+      {
+        n: "DOM update",
+        d: [
+          "Chỉ các node DOM và text binding thay đổi được cập nhật, sau đó ứng dụng chờ tương tác tiếp theo.",
+          "Only changed DOM nodes and text bindings are updated, then the app waits for the next interaction."
+        ]
+      }
+    ],
+    hasStructure: true
+  },
+  react: {
+    col: "--rea",
+    c: [
+      "React là thư viện JavaScript do Meta phát triển để xây dựng giao diện người dùng (UI). React tập trung vào tầng giao diện: bạn mô tả UI bằng component trả về JSX, còn React quản lý reconciliation và cập nhật DOM. Routing, gọi API, quản lý state phức tạp hoặc SSR/SSG đầy đủ thường kết hợp với hệ sinh thái hoặc framework như Next.js.",
+      "React is a JavaScript library from Meta for building user interfaces. It focuses on the view layer: you describe UI with components returning JSX while React handles reconciliation and DOM updates. Routing, data fetching, complex state or full SSR/SSG typically come from ecosystem libraries or a framework like Next.js."
+    ],
+    lv: [
+      { l: ["Cơ bản", "Basic"], i: [] },
+      { l: ["Trung cấp", "Intermediate"], i: [] },
+      { l: ["Nâng cao", "Advanced"], i: [] }
+    ],
+    fl: [
+      {
+        n: "JSX → jsx() runtime",
+        d: [
+          "Trình biên dịch (Babel/SWC) chuyển JSX thành lời gọi hàm tạo React element (mô tả nhẹ dạng object).",
+          "The compiler (Babel/SWC) transforms JSX into runtime calls that create React elements (lightweight descriptor objects)."
+        ]
+      },
+      {
+        n: "Render → Element Tree",
+        d: [
+          "React gọi hàm component để xây cây element đại diện cho trạng thái giao diện mong muốn.",
+          "React invokes component functions to build an element tree representing the desired UI state."
+        ]
+      },
+      {
+        n: "Trigger: setState / props",
+        d: [
+          "Sự kiện người dùng hoặc dữ liệu mới gọi setter/đổi props → React lập lịch render lại (có gộp/batch các cập nhật trong cùng sự kiện).",
+          "User events or new data call setters/update props → React schedules re-renders (batching updates within the same event)."
+        ]
+      },
+      {
+        n: "Reconciliation (Diffing)",
+        d: [
+          "React so sánh cây mới với cây trước đó theo type và key để xác định phần cần giữ, cập nhật, thêm mới hoặc gỡ bỏ.",
+          "React compares the new tree against the previous one by type and key to find what to keep, update, insert or unmount."
+        ]
+      },
+      {
+        n: "Commit → DOM & Effects",
+        d: [
+          "React áp dụng các thay đổi tối thiểu lên DOM thật, chạy layout effect đồng bộ và chạy useEffect sau khi trình duyệt paint.",
+          "React commits minimal mutations to the real DOM, runs layout effects synchronously and runs useEffect callbacks after paint."
+        ]
+      }
+    ],
+    hasStructure: true
+  },
+  next: {
+    col: "--nxt",
+    c: [
+      "Next.js là framework full-stack xây dựng trên React do Vercel phát triển. Nó bổ sung App Router theo thư mục, React Server Components (RSC), SSR/SSG/ISR, Server Actions, Route Handlers cùng tối ưu Image, Font và SEO. Mục tiêu là xây dựng ứng dụng React có hiệu năng tải đầu tốt, SEO rõ ràng và hỗ trợ cả server lẫn client.",
+      "Next.js is a full-stack framework built on React by Vercel. It adds file-based App Router, React Server Components (RSC), SSR/SSG/ISR, Server Actions, Route Handlers along with Image, Font and SEO optimizations. Its goal is fast initial loads, strong SEO and seamless server/client composition on React."
+    ],
+    lv: [
+      { l: ["Cơ bản", "Basic"], i: [] },
+      { l: ["Trung cấp", "Intermediate"], i: [] },
+      { l: ["Nâng cao", "Advanced"], i: [] }
+    ],
+    fl: [
+      {
+        n: "Request & Cache Check",
+        d: [
+          "Trình duyệt gửi request tới URL; tầng edge/CDN/server kiểm tra cache trang tĩnh/ISR hoặc chuyển qua middleware.",
+          "The browser requests a URL; edge/CDN/server checks static/ISR cache or runs middleware first."
+        ]
+      },
+      {
+        n: "App Router + Nested Layouts",
+        d: [
+          "App Router ánh xạ thư mục trong app/ tới route và ghép các layout lồng nhau quanh page/slot tương ứng.",
+          "The App Router maps folders in app/ to routes and nests layouts around the matching page or slots."
+        ]
+      },
+      {
+        n: "Server Render (RSC)",
+        d: [
+          "Server Components chạy trên server, truy cập dữ liệu an toàn và tạo HTML ban đầu kèm RSC payload.",
+          "Server Components execute on the server, fetch data safely and produce initial HTML plus the RSC payload."
+        ]
+      },
+      {
+        n: "Stream HTML & Payload",
+        d: [
+          "Phần đã sẵn sàng được stream xuống trình duyệt sớm; vùng bọc <Suspense> hiển thị fallback và stream tiếp khi dữ liệu về.",
+          "Ready chunks stream to the browser early; <Suspense> boundaries show fallbacks and stream remaining sections as data resolves."
+        ]
+      },
+      {
+        n: "Hydration",
+        d: [
+          "Trình duyệt tải bundle JS của Client Components ('use client') và hydrate để gắn event handler cho phần tương tác.",
+          "The browser loads JS for Client Components ('use client') and hydrates interactive nodes to attach event listeners."
+        ]
+      },
+      {
+        n: "Soft Client Navigation",
+        d: [
+          "Khi điều hướng qua <Link> hoặc router.push(), Next.js giữ layout chung và chỉ lấy RSC payload của phần thay đổi.",
+          "On <Link> or router.push() navigation, Next.js preserves shared layouts and fetches only the RSC payload for changed segments."
+        ]
+      }
+    ],
+    hasStructure: true
+  },
+  network: {
+    col: "--net",
+    c: [
+      "Front-end không chạy tách biệt mà tương tác trực tiếp với mạng, trình duyệt và người dùng. Hiểu rõ giao thức HTTP, cơ chế cache, cách trình duyệt dựng trang và các lỗ hổng như XSS/CSRF giúp kỹ sư xây dựng ứng dụng nhanh, ổn định và an toàn ngay từ lớp giao diện.",
+      "Front-end code does not run in isolation—it operates across networks, browsers and untrusted user input. Understanding HTTP protocols, caching, browser rendering pipelines and threats like XSS/CSRF enables engineers to build fast, resilient and secure web apps."
+    ],
+    lv: [
+      {
+        l: ["Cơ bản", "Basic"],
+        i: [
+          {
+            t: ["DNS, TCP/TLS & HTTP/1.1–2–3", "DNS, TCP/TLS & HTTP/1.1–2–3"],
+            d: [
+              "Quá trình từ lúc gõ tên miền đến khi nhận phản hồi HTTP qua các thế hệ giao thức.",
+              "The path from domain resolution to receiving HTTP responses across protocol versions."
+            ],
+            x: [
+              "Giảm độ trễ kết nối và tăng khả năng tải song song tài nguyên web.",
+              "Cut connection latency and improve parallel transfer of web assets."
+            ],
+            code: "// HTTP/2: multiplexing over 1 TCP connection\n// HTTP/3: QUIC over UDP, faster handshake & less head-of-line blocking\n// TLS 1.3 encrypts traffic in 1-RTT"
+          },
+          {
+            t: ["Cookie vs LocalStorage vs SessionStorage", "Cookie vs LocalStorage vs SessionStorage"],
+            d: [
+              "Ba cơ chế lưu trữ phía trình duyệt với vòng đời, phạm vi gửi kèm request và mức độ an toàn khác nhau.",
+              "Three browser storage mechanisms differing in lifetime, automatic request attachment and security posture."
+            ],
+            x: [
+              "Chọn đúng nơi lưu session, token hoặc tùy chọn giao diện.",
+              "Store session identifiers, tokens or UI preferences in the right place."
+            ],
+            code: "// Server sets secure cookie:\n// Set-Cookie: sid=abc; HttpOnly; Secure; SameSite=Lax; Path=/\n\nlocalStorage.setItem('theme', 'dark'); // persists across tabs/restarts\nsessionStorage.setItem('step', '2'); // cleared when tab closes"
+          }
+        ]
+      },
+      {
+        l: ["Trung cấp", "Intermediate"],
+        i: [
+          {
+            t: ["CORS & Preflight (OPTIONS)", "CORS & Preflight (OPTIONS)"],
+            d: [
+              "Cơ chế trình duyệt kiểm soát truy cập tài nguyên chéo origin (khác scheme, host hoặc port).",
+              "Browser security policy governing cross-origin requests across different scheme, host or port."
+            ],
+            x: [
+              "Cho phép gọi API hợp lệ từ domain khác mà không mở cửa cho mọi origin không mong muốn.",
+              "Allow authorized cross-origin API calls without exposing resources to arbitrary origins."
+            ],
+            code: "// Preflight request sent before custom headers / PUT / DELETE:\n// OPTIONS /api/orders\n// Origin: https://app.example.com\n// Access-Control-Request-Method: DELETE\n\n// Server response:\n// Access-Control-Allow-Origin: https://app.example.com\n// Access-Control-Allow-Credentials: true"
+          },
+          {
+            t: ["Critical Rendering Path", "Critical Rendering Path"],
+            d: [
+              "Chuỗi bước trình duyệt chuyển HTML, CSS và JS thành pixel hiển thị trên màn hình.",
+              "The sequence of steps the browser takes to turn HTML, CSS and JS into pixels on screen."
+            ],
+            x: [
+              "Tránh chặn render ban đầu và giảm layout shift khi giao diện thay đổi.",
+              "Avoid blocking initial paint and minimize layout recalculations during updates."
+            ],
+            code: "// HTML -> DOM | CSS -> CSSOM -> Render Tree\n// -> Layout (geometry) -> Paint (pixels) -> Composite (layers)\n\n// Avoid reading layout right after writing style in a loop:\n// Batch DOM reads before DOM writes."
+          }
+        ]
+      },
+      {
+        l: ["Nâng cao", "Advanced"],
+        i: [
+          {
+            t: ["XSS, CSRF & Clickjacking", "XSS, CSRF & Clickjacking"],
+            d: [
+              "Ba nhóm tấn công phổ biến nhắm vào trình duyệt và phiên làm việc của người dùng.",
+              "Three common web attacks targeting browsers, DOM execution and user sessions."
+            ],
+            x: [
+              "Ngăn chèn script độc hại, giả mạo yêu cầu và nhúng trang lừa đảo trong iframe.",
+              "Prevent script injection, forged state-changing requests and unauthorized iframe framing."
+            ],
+            code: "// Defense in depth:\n// 1. XSS: escape/sanitize user HTML; avoid raw innerHTML / dangerouslySetInnerHTML\n// 2. CSRF: use SameSite=Lax/Strict cookies + anti-CSRF token or Bearer auth\n// 3. Clickjacking: frame-ancestors 'none' (CSP) or X-Frame-Options: DENY"
+          },
+          {
+            t: ["Security Headers (CSP, HSTS)", "Security Headers (CSP, HSTS)"],
+            d: [
+              "Các HTTP response header hướng dẫn trình duyệt siết chặt chính sách tải tài nguyên và kết nối.",
+              "HTTP response headers instructing browsers to enforce strict transport and resource policies."
+            ],
+            x: [
+              "Tạo lớp phòng thủ chuẩn production cho ứng dụng front-end và SSR.",
+              "Establish production-grade browser defenses for front-end and SSR apps."
+            ],
+            code: "Content-Security-Policy: default-src 'self'; script-src 'self' 'nonce-r4nd0m'; object-src 'none'; frame-ancestors 'none';\nStrict-Transport-Security: max-age=31536000; includeSubDomains;\nX-Content-Type-Options: nosniff;\nReferrer-Policy: strict-origin-when-cross-origin"
+          }
+        ]
+      }
+    ],
+    fl: [
+      {
+        n: "DNS Lookup & Socket",
+        d: [
+          "Trình duyệt tra cứu IP của tên miền qua DNS cache/resolver và mở kết nối TCP/QUIC.",
+          "The browser resolves the domain name to an IP via DNS cache/resolver and opens a TCP or QUIC socket."
+        ]
+      },
+      {
+        n: "TLS Handshake",
+        d: [
+          "Đàm phán mã hóa, xác thực chứng chỉ máy chủ và thiết lập kênh bảo mật HTTPS.",
+          "Negotiates cipher suites, verifies the server certificate and establishes an encrypted HTTPS channel."
+        ]
+      },
+      {
+        n: "CORS / Cookie Policy",
+        d: [
+          "Trình duyệt gắn cookie hợp lệ theo SameSite/Path và kiểm tra CORS nếu gọi sang origin khác.",
+          "The browser attaches matching cookies per SameSite/Path rules and checks CORS for cross-origin requests."
+        ]
+      },
+      {
+        n: "DOM & CSSOM Build",
+        d: [
+          "Parser dựng cây DOM từ HTML và CSSOM từ stylesheet; script đồng bộ có thể tạm dừng parser.",
+          "Parsers build the DOM from HTML and CSSOM from stylesheets; synchronous scripts can pause parsing."
+        ]
+      },
+      {
+        n: "Layout, Paint & Composite",
+        d: [
+          "Trình duyệt tính vị trí/kích thước (Layout), vẽ lớp (Paint) và ghép lớp lên GPU (Composite).",
+          "The browser computes layout boxes, paints layers and composites them on the GPU."
+        ]
+      }
+    ],
+    hasStructure: false
+  },
+  jsts: {
+    col: "--jst",
+    c: [
+      "JavaScript là ngôn ngữ cốt lõi của web, còn TypeScript bổ sung hệ thống kiểu tĩnh giúp phát hiện lỗi sớm, tự động hoàn thiện và giữ mã nguồn dễ bảo trì khi dự án lớn lên. Nắm chắc Event Loop, Closure, Immutability và TypeScript narrowing là nền tảng cho mọi framework.",
+      "JavaScript powers the web runtime, while TypeScript adds static typing to catch bugs early, improve tooling and keep large codebases maintainable. Mastering the Event Loop, closures, immutability and TypeScript narrowing underpins every framework."
+    ],
+    lv: [
+      {
+        l: ["Cơ bản", "Basic"],
+        i: [
+          {
+            t: ["Execution Context & Call Stack", "Execution Context & Call Stack"],
+            d: [
+              "Cách JavaScript tạo phạm vi thực thi cho biến/hàm và theo dõi lời gọi hàm theo cấu trúc LIFO.",
+              "How JavaScript sets up variable/function execution scopes and tracks active function calls on a LIFO stack."
+            ],
+            x: [
+              "Hiểu scope, hoisting và nguyên nhân gây lỗi stack overflow khi đệ quy vô hạn.",
+              "Understand lexical scope, hoisting and call-stack overflow on unbounded recursion."
+            ],
+            code: "function greet(name: string): string {\n  const prefix = 'Hi';\n  return `${prefix}, ${name}`;\n}\n// Call stack: global -> greet('Lan') -> pops on return"
+          },
+          {
+            t: ["Immutability & Array/Object Updates", "Immutability & Array/Object Updates"],
+            d: [
+              "Tạo bản sao mới thay vì sửa trực tiếp dữ liệu hiện có khi cập nhật trạng thái.",
+              "Produce new copies instead of mutating existing objects or arrays in place when updating state."
+            ],
+            x: [
+              "Giúp framework phát hiện thay đổi tham chiếu nhanh và tránh lỗi chia sẻ tham chiếu ngầm.",
+              "Help frameworks detect reference changes cleanly and prevent shared-reference bugs."
+            ],
+            code: "const state = { count: 1, tags: ['ts', 'ui'] };\nconst next = {\n  ...state,\n  count: state.count + 1,\n  tags: [...state.tags, 'perf']\n};"
+          }
+        ]
+      },
+      {
+        l: ["Trung cấp", "Intermediate"],
+        i: [
+          {
+            t: ["Event Loop: Microtask vs Macrotask", "Event Loop: Microtask vs Macrotask"],
+            d: [
+              "Cơ chế điều phối luồng đơn của JS giữa Call Stack, Microtask Queue và Macrotask Queue.",
+              "JS single-thread coordination across the Call Stack, Microtask Queue and Macrotask Queue."
+            ],
+            x: [
+              "Giải thích chính xác thứ tự chạy của Promise, setTimeout và cập nhật giao diện.",
+              "Predict execution order across Promises, setTimeout callbacks and UI rendering."
+            ],
+            code: "console.log('1: sync');\nsetTimeout(() => console.log('4: macrotask'), 0);\nPromise.resolve().then(() => console.log('3: microtask'));\nconsole.log('2: sync');"
+          },
+          {
+            t: ["Closures, this & Prototypes", "Closures, this & Prototypes"],
+            d: [
+              "Closure giữ biến từ scope ngoài; `this` phụ thuộc cách hàm được gọi; prototype là chuỗi kế thừa thuộc tính.",
+              "Closures retain outer variables; `this` depends on call site; prototypes form property inheritance chains."
+            ],
+            x: [
+              "Tạo trạng thái đóng gói an toàn và tránh mất ngữ cảnh `this` khi truyền callback.",
+              "Encapsulate private state cleanly and avoid losing `this` context when passing callbacks."
+            ],
+            code: "function createCounter(start = 0) {\n  let n = start;\n  return {\n    inc: () => ++n,\n    value: () => n\n  };\n}"
+          }
+        ]
+      },
+      {
+        l: ["Nâng cao", "Advanced"],
+        i: [
+          {
+            t: ["Type vs Interface & Narrowing", "Type vs Interface & Narrowing"],
+            d: [
+              "Định nghĩa cấu trúc dữ liệu và thu hẹp kiểu (type narrowing) để làm việc an toàn với union types.",
+              "Modeling shapes and narrowing union types so TypeScript verifies every branch."
+            ],
+            x: [
+              "Xử lý trạng thái tải/thành công/lỗi rõ ràng mà không cần ép kiểu thiếu an toàn.",
+              "Model loading, success and error states exhaustively without unsafe type assertions."
+            ],
+            code: "type AsyncState<T> =\n  | { status: 'idle' }\n  | { status: 'loading' }\n  | { status: 'success'; data: T }\n  | { status: 'error'; message: string };\n\nfunction renderState(s: AsyncState<string[]>) {\n  if (s.status === 'success') return s.data.length;\n  if (s.status === 'error') return s.message;\n  return 0;\n}"
+          },
+          {
+            t: ["Generics, Utility Types & unknown", "Generics, Utility Types & unknown"],
+            d: [
+              "Viết hàm/kiểu tái sử dụng theo tham số kiểu <T>, dùng Utility Types và ưu tiên unknown hơn any.",
+              "Write reusable generic abstractions, apply built-in utility types and prefer unknown over any."
+            ],
+            x: [
+              "Tái sử dụng kiểu dữ liệu sạch sẽ cho API response, form patch và dictionary.",
+              "Keep API payloads, partial updates and lookup maps strongly typed without losing safety."
+            ],
+            code: "interface User {\n  id: string;\n  name: string;\n  email: string;\n}\ntype UserPatch = Partial<Pick<User, 'name' | 'email'>>;\ntype UserMap = Record<User['id'], User>;\n\nfunction parseJson(raw: string): unknown {\n  return JSON.parse(raw);\n}"
+          }
+        ]
+      }
+    ],
+    fl: [
+      {
+        n: "Synchronous Call Stack",
+        d: [
+          "JavaScript chạy các câu lệnh đồng bộ trên Call Stack cho đến khi stack trống.",
+          "JavaScript executes synchronous frames on the Call Stack until the stack becomes empty."
+        ]
+      },
+      {
+        n: "Drain Microtask Queue",
+        d: [
+          "Khi stack rỗng, Event Loop chạy toàn bộ microtask (Promise callbacks, queueMicrotask) trước khi sang bước tiếp theo.",
+          "Once the stack is empty, the Event Loop drains all queued microtasks before moving forward."
+        ]
+      },
+      {
+        n: "Render / Paint Opportunity",
+        d: [
+          "Trình duyệt có thể cập nhật giao diện/paint nếu đến nhịp khung hình cần thiết.",
+          "The browser can update rendering/paint when a frame commit is due."
+        ]
+      },
+      {
+        n: "Next Macrotask",
+        d: [
+          "Event Loop lấy một macrotask tiếp theo (như timer hoặc event) đưa vào Call Stack và lặp lại.",
+          "The Event Loop dequeues the next macrotask (such as a timer or input event) onto the stack and repeats."
+        ]
+      }
+    ],
+    hasStructure: false
+  },
+  perf: {
+    col: "--prf",
+    c: [
+      "Hiệu năng web ảnh hưởng trực tiếp đến trải nghiệm người dùng, tỷ lệ chuyển đổi và thứ hạng tìm kiếm. Kết hợp đo lường Core Web Vitals, tối ưu bundle/caching, SEO kỹ thuật và quan sát dữ liệu thực tế (RUM) giúp hệ thống duy trì tốc độ ổn định.",
+      "Web performance shapes user experience, conversion rates and search visibility. Combining Core Web Vitals optimization, bundle/cache discipline, technical SEO and Real User Monitoring keeps applications fast in production."
+    ],
+    lv: [
+      {
+        l: ["Cơ bản", "Basic"],
+        i: [
+          {
+            t: ["Core Web Vitals (LCP, INP, CLS)", "Core Web Vitals (LCP, INP, CLS)"],
+            d: [
+              "Ba chỉ số trọng tâm đánh giá tốc độ tải nội dung lớn nhất (LCP), độ trễ tương tác (INP) và độ ổn định bố cục (CLS).",
+              "Core metrics measuring largest content load (LCP), interaction responsiveness (INP) and visual layout stability (CLS)."
+            ],
+            x: [
+              "Xác định chính xác điểm nghẽn trải nghiệm người dùng trên thiết bị di động và máy tính.",
+              "Pinpoint real-world UX bottlenecks across mobile and desktop viewports."
+            ],
+            code: "// LCP: optimize hero image size/format/priority & TTFB\n// INP: keep main-thread tasks short (<50ms), defer non-urgent work\n// CLS: always reserve dimensions (width/height or aspect-ratio)"
+          },
+          {
+            t: ["HTTP Caching & Cache-Control", "HTTP Caching & Cache-Control"],
+            d: [
+              "Kiểm soát bộ nhớ đệm ở trình duyệt và CDN bằng header Cache-Control, ETag và revalidation.",
+              "Control browser and CDN caching using Cache-Control directives, ETags and revalidation."
+            ],
+            x: [
+              "Tải lại tức thì cho file tĩnh có hash mà vẫn đảm bảo HTML/dữ liệu luôn cập nhật.",
+              "Serve hashed static assets from cache while keeping HTML and dynamic data fresh."
+            ],
+            code: "// Hashed static assets (app.8f3a1c.js):\n// Cache-Control: public, max-age=31536000, immutable\n\n// HTML document:\n// Cache-Control: no-cache"
+          }
+        ]
+      },
+      {
+        l: ["Trung cấp", "Intermediate"],
+        i: [
+          {
+            t: ["Code Splitting & Tree-shaking", "Code Splitting & Tree-shaking"],
+            d: [
+              "Chia nhỏ bundle theo route/tính năng và loại bỏ mã nguồn không dùng tới khi build.",
+              "Split bundles by route or feature and eliminate unused exports during bundling."
+            ],
+            x: [
+              "Giảm lượng JavaScript tải và parse ban đầu trên thiết bị cấu hình trung bình.",
+              "Shrink initial JavaScript download and parse cost on constrained devices."
+            ],
+            code: "// Route/component code splitting\nconst ChartModal = lazy(() => import('./ChartModal'));\n\n// Prefer named ES exports with side-effect-free modules\n// so bundlers can tree-shake unused helpers"
+          },
+          {
+            t: ["Technical SEO (Metadata, Sitemap, JSON-LD)", "Technical SEO (Metadata, Sitemap, JSON-LD)"],
+            d: [
+              "Giúp công cụ tìm kiếm thu thập, hiểu ngữ cảnh và lập chỉ mục trang chính xác.",
+              "Help search engines crawl, interpret and index pages accurately."
+            ],
+            x: [
+              "Đảm bảo nội dung có sẵn khi crawl, tránh trùng lặp URL (canonical) và hiển thị rich snippet.",
+              "Ensure indexable HTML content, resolve duplicate URLs with canonical links and enable structured snippets."
+            ],
+            code: "<!-- Key technical SEO elements -->\n<link rel=\"canonical\" href=\"https://example.com/guides/react\" />\n<meta name=\"description\" content=\"Practical front-end guide.\" />\n<!-- + robots.txt, sitemap.xml & schema.org JSON-LD -->"
+          }
+        ]
+      },
+      {
+        l: ["Nâng cao", "Advanced"],
+        i: [
+          {
+            t: ["Observability: RUM vs Synthetic", "Observability: RUM vs Synthetic"],
+            d: [
+              "Kết hợp đo lường từ người dùng thật (Real User Monitoring) và kiểm thử mô phỏng định kỳ (Synthetic).",
+              "Combine Real User Monitoring from actual sessions with scheduled Synthetic checks."
+            ],
+            x: [
+              "Phát hiện sớm suy giảm hiệu năng theo từng vùng địa lý, thiết bị hoặc phiên bản release.",
+              "Catch performance regressions early by region, device tier or release version."
+            ],
+            code: "// Report Web Vitals / performance entries with release & route tags\nwindow.addEventListener('error', (event) => {\n  // send sanitized error + release version + requestId to observability endpoint\n});"
+          },
+          {
+            t: ["Error & Trace Correlation", "Error & Trace Correlation"],
+            d: [
+              "Gắn mã định danh yêu cầu/trace để liên kết lỗi giao diện với log máy chủ và truy vấn API.",
+              "Attach request or trace IDs so front-end errors correlate with backend logs and traces."
+            ],
+            x: [
+              "Rút ngắn thời gian điều tra sự cố (MTTR) khi hệ thống gặp lỗi ở production.",
+              "Shorten mean time to resolution (MTTR) when production issues occur."
+            ],
+            code: "// Include correlation header on API calls when available\n// X-Request-Id: req_94f1c2\n// Log: route, user cohort, appVersion, error message & traceId"
+          }
+        ]
+      }
+    ],
+    fl: [
+      {
+        n: "Measure Baseline (RUM + Lab)",
+        d: [
+          "Thu thập LCP, INP, CLS và waterfall mạng thực tế để xác định nút thắt ưu tiên cao nhất.",
+          "Collect LCP, INP, CLS and network waterfalls to identify the highest-impact bottleneck."
+        ]
+      },
+      {
+        n: "Optimize Delivery & Bundle",
+        d: [
+          "Tối ưu kích thước ảnh/font, bật nén, tách chunk lazy và cấu hình Cache-Control phù hợp.",
+          "Optimize media/font payloads, enable compression, split lazy chunks and set proper Cache-Control."
+        ]
+      },
+      {
+        n: "Verify SEO & Render Output",
+        d: [
+          "Kiểm tra HTML trả về, metadata, canonical, structured data, robots.txt và sitemap.xml.",
+          "Verify rendered HTML, metadata, canonicals, structured data, robots.txt and sitemap.xml."
+        ]
+      },
+      {
+        n: "Monitor & Alert Regressions",
+        d: [
+          "Theo dõi chỉ số sau mỗi bản phát hành và cảnh báo khi p75/p95 vượt ngưỡng mục tiêu.",
+          "Track metrics across releases and alert when p75/p95 percentiles cross budgets."
+        ]
+      }
+    ],
+    hasStructure: false
+  },
+  ops: {
+    col: "--ops",
+    c: [
+      "Một ứng dụng front-end bền vững cần quy trình kỹ thuật rõ ràng: chuẩn hóa code, kiểm tra kiểu, khóa phiên bản phụ thuộc, kiểm thử đa tầng (Unit, Component, E2E) và pipeline CI/CD tự động kèm cơ chế an toàn khi triển khai.",
+      "Sustainable front-end engineering relies on disciplined workflows: linting, type-checking, locked dependencies, layered testing (unit, component, E2E) and automated CI/CD with safe deployment strategies."
+    ],
+    lv: [
+      {
+        l: ["Cơ bản", "Basic"],
+        i: [
+          {
+            t: ["Lint, Format, Type-check & Lockfile", "Lint, Format, Type-check & Lockfile"],
+            d: [
+              "Tự động hóa kiểm tra phong cách mã, lỗi cú pháp, kiểu TypeScript và khóa phiên bản thư viện.",
+              "Automate code style, lint rules, TypeScript type-checking and deterministic dependency versions."
+            ],
+            x: [
+              "Giữ mã nguồn đồng nhất giữa mọi thành viên và đảm bảo bản build tái lập được.",
+              "Keep code consistent across contributors and ensure reproducible builds."
+            ],
+            code: "npx tsc --noEmit\nnpx eslint src\nnpx vitest run\n# Commit lockfile (package-lock.json / pnpm-lock.yaml) & keep secrets out of git"
+          },
+          {
+            t: ["Testing Pyramid (Unit, Component, E2E)", "Testing Pyramid (Unit, Component, E2E)"],
+            d: [
+              "Phân bổ kiểm thử theo chi phí và tốc độ: nhiều test đơn vị/component nhanh, tập trung E2E cho luồng chính.",
+              "Balance test layers by speed and cost: fast unit/component tests at the base, focused E2E for critical flows."
+            ],
+            x: [
+              "Bắt lỗi sớm ở hàm/component và xác thực luồng người dùng thật trước khi release.",
+              "Catch logic/UI regressions early and verify end-to-end user journeys before release."
+            ],
+            code: "// 1. Unit: pure helpers, reducers, pipes (Vitest / Jest)\n// 2. Component: rendered UI + user events (Testing Library / TestBed)\n// 3. E2E: real browser flows like login & checkout (Playwright / Cypress)"
+          }
+        ]
+      },
+      {
+        l: ["Trung cấp", "Intermediate"],
+        i: [
+          {
+            t: ["CI Pipeline & Preview Deployments", "CI Pipeline & Preview Deployments"],
+            d: [
+              "Chạy kiểm tra tự động trên mỗi Pull Request và tạo môi trường xem trước riêng cho từng nhánh/PR.",
+              "Run automated checks on every pull request and provision isolated preview environments per change."
+            ],
+            x: [
+              "Phát hiện lỗi trước khi merge và giúp reviewer/QA kiểm tra trực tiếp trên URL preview.",
+              "Catch issues before merge and let reviewers and QA verify live preview URLs."
+            ],
+            code: "# Typical CI steps on Pull Request:\n# 1. Install exact deps (--ci / --frozen-lockfile)\n# 2. Lint + tsc --noEmit + unit/component tests\n# 3. Production build + preview deployment URL"
+          },
+          {
+            t: ["Environment & Secret Separation", "Environment & Secret Separation"],
+            d: [
+              "Phân tách cấu hình theo môi trường và phân biệt biến công khai ở client với biến bí mật ở server.",
+              "Separate configuration per environment and distinguish client-exposed variables from server secrets."
+            ],
+            x: [
+              "Tránh rò rỉ khóa bí mật vào bundle trình duyệt và cấu hình sai giữa staging/production.",
+              "Prevent secret leakage into client bundles and avoid staging/production config drift."
+            ],
+            code: "// Client-safe public config (embedded at build if public):\n// VITE_API_BASE_URL=... or NEXT_PUBLIC_SITE_URL=...\n\n// Server-only secrets (never expose to client components/bundles):\n// DATABASE_URL=..., AUTH_SECRET=..."
+          }
+        ]
+      },
+      {
+        l: ["Nâng cao", "Advanced"],
+        i: [
+          {
+            t: ["Rollback, Blue-Green & Canary", "Rollback, Blue-Green & Canary"],
+            d: [
+              "Các chiến lược phát hành giúp giảm rủi ro gián đoạn và khôi phục nhanh khi bản mới gặp sự cố.",
+              "Release strategies that limit blast radius and enable rapid recovery if a deployment regresses."
+            ],
+            x: [
+              "Triển khai tự tin lên production với khả năng quay lại phiên bản ổn định trong tích tắc.",
+              "Ship production updates safely with fast rollback to a known-good release."
+            ],
+            code: "// Rollback: switch active release pointer/artifact back to previous version\n// Blue-Green: two identical environments; switch traffic after verification\n// Canary: route a small % of traffic to new version first, then ramp up"
+          },
+          {
+            t: ["Release Gates & Post-Deploy Checks", "Release Gates & Post-Deploy Checks"],
+            d: [
+              "Kiểm tra sức khỏe ứng dụng, tỷ lệ lỗi và chỉ số hiệu năng ngay sau khi triển khai.",
+              "Verify health checks, error rates and performance signals right after deployment."
+            ],
+            x: [
+              "Phát hiện sớm lỗi cấu hình môi trường, cache cũ hoặc API không tương thích ngược.",
+              "Catch env misconfigurations, stale cache mismatches or API breaking changes quickly."
+            ],
+            code: "// Post-deploy checklist:\n// - Critical routes return expected HTTP status & render cleanly\n// - Error rate & p75 Web Vitals remain within release threshold\n// - Rollback plan tested and ready"
+          }
+        ]
+      }
+    ],
+    fl: [
+      {
+        n: "Local & Pre-Merge Checks",
+        d: [
+          "Chạy lint, format, type-check (tsc --noEmit) và unit/component test trước khi gộp code.",
+          "Run lint, format, type-check (tsc --noEmit) and unit/component tests before merging."
+        ]
+      },
+      {
+        n: "CI Build & Preview",
+        d: [
+          "Hệ thống CI dựng bản production và xuất bản môi trường preview để kiểm thử tích hợp/E2E.",
+          "CI builds the production bundle and publishes a preview environment for integration/E2E checks."
+        ]
+      },
+      {
+        n: "Staged / Canary Rollout",
+        d: [
+          "Đưa bản phát hành lên staging hoặc chia lưu lượng canary/blue-green và theo dõi lỗi.",
+          "Promote to staging or route canary/blue-green traffic while monitoring error rates."
+        ]
+      },
+      {
+        n: "Promote or Rollback",
+        d: [
+          "Hoàn tất chuyển lưu lượng nếu ổn định, hoặc rollback ngay về bản trước nếu có sự cố.",
+          "Complete traffic cutover once healthy, or roll back immediately if regressions appear."
+        ]
+      }
+    ],
+    hasStructure: false
+  }
+};
+
+// Enrich network, jsts, perf, and ops with additional practical cards
+FW.network.lv[1].i.push({
+  t: ["Preload, Prefetch & HTTP Cache Validation", "Preload, Prefetch & HTTP Cache Validation"],
+  d: [
+    "Gợi ý nạp tài nguyên cho trình duyệt và xác thực cache bằng ETag / Last-Modified.",
+    "Browser resource hints and conditional cache validation with ETag or Last-Modified."
+  ],
+  x: [
+    "Giảm thời gian chờ cho tài nguyên quan trọng hoặc trang tiếp theo mà không lãng phí băng thông.",
+    "Reduce wait time for critical assets or likely next routes without wasting bandwidth."
+  ],
+  code: "<link rel=\"preload\" href=\"/fonts/sans.woff2\" as=\"font\" type=\"font/woff2\" crossorigin />\n<!-- Conditional request: If-None-Match: \"v12\" -> 304 Not Modified -->"
+});
+
+FW.jsts.lv[1].i.push({
+  t: ["Promise Combinators & AbortController", "Promise Combinators & AbortController"],
+  d: [
+    "Điều phối nhiều tác vụ bất đồng bộ và hủy request/tác vụ lỗi thời khi người dùng đổi ngữ cảnh.",
+    "Coordinate concurrent promises and abort stale requests or async work on context changes."
+  ],
+  x: [
+    "Tránh race condition khi tìm kiếm nhanh, chuyển tab hoặc rời khỏi màn hình đang tải dữ liệu.",
+    "Prevent race conditions during rapid search queries, tab switches or component unmounts."
+  ],
+  code: "const controller = new AbortController();\nconst results = await Promise.allSettled([\n  fetch('/api/profile', { signal: controller.signal }),\n  fetch('/api/prefs', { signal: controller.signal })\n]);\n// controller.abort(); // cancels in-flight requests"
+});
+
+FW.jsts.lv[2].i.push({
+  t: ["Strict TypeScript, Guards & ESM", "Strict TypeScript, Guards & ESM"],
+  d: [
+    "Bật strict mode trong TypeScript, viết type guard an toàn và chuẩn hóa ES Modules (import/export).",
+    "Enable TypeScript strict mode, write type predicates/guards and standardize on ES Modules."
+  ],
+  x: [
+    "Bắt lỗi null/undefined sớm lúc biên dịch và hỗ trợ bundler tree-shake mã nguồn hiệu quả.",
+    "Catch null/undefined issues at compile time and enable reliable bundler tree-shaking."
+  ],
+  code: "type ApiErr = { code: string; message: string };\nfunction isApiErr(v: unknown): v is ApiErr {\n  return typeof v === 'object' && v !== null && 'code' in v && 'message' in v;\n}\nexport { isApiErr };"
+});
+
+FW.perf.lv[1].i.push({
+  t: ["LCP, INP & CLS Playbook", "LCP, INP & CLS Playbook"],
+  d: [
+    "Các bước thực hành cụ thể để cải thiện từng chỉ số Core Web Vitals trên ứng dụng thực tế.",
+    "Actionable remediation steps for improving LCP, INP and CLS in real applications."
+  ],
+  x: [
+    "Biến chỉ số đo được thành checklist sửa lỗi rõ ràng cho ảnh hero, handler nặng và layout.",
+    "Turn metric scores into targeted fixes for hero media, heavy event handlers and layout shifts."
+  ],
+  code: "// LCP: priority/fetchPriority='high' on hero media, fast TTFB, compressed images\n// INP: break >50ms tasks with setTimeout/scheduler/transitions, avoid heavy sync work\n// CLS: set explicit width/height or aspect-ratio on images, ads, embeds & skeletons"
+});
+
+FW.ops.lv[1].i.push({
+  t: ["API Mocking & Git/PR Discipline", "API Mocking & Git/PR Discipline"],
+  d: [
+    "Giả lập phản hồi API đáng tin cậy khi test và duy trì quy trình nhánh/PR/review gọn gàng.",
+    "Use reliable API mocking during tests and follow disciplined branch, PR and review practices."
+  ],
+  x: [
+    "Chạy test độc lập, ít flaky và giữ lịch sử thay đổi rõ ràng để dễ review lẫn rollback.",
+    "Keep tests deterministic with low flakiness and maintain clear PR history for review and rollback."
+  ],
+  code: "// Keep PRs focused & small:\n// - Atomic commits with clear scope\n// - Mock network boundaries consistently in unit/component/E2E tests\n// - Verify CI checks pass before merge"
+});
+
+var CMP = {
+  h: ["", "Angular", "ReactJS", "Next.js"],
+  r: [
+    [
+      ["Bản chất", "Nature"],
+      ["Framework front-end đầy đủ", "Full front-end framework"],
+      ["Thư viện UI", "UI library"],
+      ["Framework full-stack trên React", "Full-stack framework on React"]
+    ],
+    [
+      ["Ngôn ngữ", "Language"],
+      "TypeScript",
+      "JavaScript / TypeScript",
+      "JavaScript / TypeScript"
+    ],
+    [
+      ["Nhà phát triển", "Backed by"],
+      "Google",
+      "Meta",
+      "Vercel"
+    ],
+    [
+      ["Render", "Rendering"],
+      ["CSR, SSR (Angular SSR), Prerender", "CSR; server render APIs / via frameworks (Next.js, Remix)"],
+      ["SSR, SSG, ISR, RSC, CSR", "SSR, SSG, ISR, RSC, CSR"]
+    ],
+    [
+      ["Data binding & Flow", "Data binding & Flow"],
+      ["Hai chiều + một chiều, Signals", "Two-way + one-way, Signals"],
+      ["Một chiều (props/state)", "One-way (props/state)"],
+      ["Một chiều (RSC + Client)", "One-way (RSC + Client)"]
+    ],
+    [
+      ["Quản lý state", "State"],
+      "Signals, RxJS, NgRx / SignalStore",
+      "useState, Context, useReducer, Zustand, Redux, TanStack Query",
+      ["Như React + RSC / Server Actions / Cache", "Like React + RSC / Server Actions / Cache"]
+    ],
+    [
+      ["Routing", "Routing"],
+      ["Có sẵn (@angular/router)", "Built in (@angular/router)"],
+      ["Thư viện ngoài (React Router, TanStack Router)", "External library (React Router, TanStack Router)"],
+      ["Theo thư mục có sẵn (App Router)", "Built-in file-based (App Router)"]
+    ],
+    [
+      ["Forms & Validation", "Forms & Validation"],
+      ["Reactive Forms, Template-driven, Signals", "Controlled/uncontrolled, React Hook Form, Zod/Yup", "Form + Server Actions + client/server validation"],
+      ["Form + Server Actions + client/server validation"]
+    ],
+    [
+      ["Độ khó học", "Learning curve"],
+      ["Cao", "Steep"],
+      ["Thấp–vừa", "Gentle–medium"],
+      ["Vừa (cần nắm vững React)", "Medium (requires solid React)"]
+    ],
+    [
+      ["SEO", "SEO"],
+      ["Tốt khi bật SSR / Prerender", "Good with SSR / framework"],
+      ["Hạn chế nếu chỉ CSR thuần", "Limited with CSR only"],
+      ["Rất tốt", "Excellent"]
+    ],
+    [
+      ["Phù hợp nhất", "Best for"],
+      ["Ứng dụng doanh nghiệp lớn, đội đông người", "Large enterprise apps, big teams"],
+      ["SPA linh hoạt, dashboard, thiết kế hệ thống", "Flexible SPAs, dashboards, design systems"],
+      ["Web cần SEO, nội dung/thương mại điện tử, full-stack", "SEO-driven sites, content/e-commerce, full-stack"]
+    ]
+  ],
+  n: [
+    [
+      "Chọn Angular khi cần kiến trúc chuẩn hóa sẵn, DI chặt chẽ và đội ngũ lớn làm việc dài hạn. Chọn React khi muốn tự do lựa chọn router/state/build tool cho SPA hoặc hệ thống UI. Chọn Next.js khi cần App Router, RSC, SSR/ISR/SEO và tích hợp server/client trên nền React. Khi chuyển từ React SPA sang Next.js, hãy di chuyển từng route/tính năng theo hướng giữ component UI thuần tái sử dụng được và tách biệt rõ logic client với server.",
+      "Choose Angular for an opinionated all-in-one architecture, strong DI and large long-lived teams. Choose React when you want flexible routing, state and build choices for SPAs or UI systems. Choose Next.js when you need App Router, RSC, SSR/ISR/SEO and integrated server/client capabilities on React. When migrating from a React SPA to Next.js, move route by route while keeping pure UI components reusable and separating client from server boundaries."
+    ]
+  ]
+};
+
+var BR = {
+  angular: {
+    2: {
+      q: ["Guard có cho phép vào route không?", "Does the guard allow entering the route?"],
+      a: [
+        ["Có (true)", "Yes (true)"],
+        [
+          "Router tải lazy chunk nếu có, rồi tạo component và hiển thị trong router-outlet.",
+          "The router fetches the lazy chunk if any, then creates the component and shows it in router-outlet."
+        ]
+      ],
+      b: [
+        ["Không (false / UrlTree)", "No (false / UrlTree)"],
+        [
+          "Điều hướng bị chặn hoặc chuyển sang /login bằng UrlTree; component không được tạo.",
+          "Navigation is blocked or redirected to /login via a UrlTree; the component is never created."
+        ]
+      ]
+    },
+    4: {
+      q: ["Component dùng chiến lược change detection nào?", "Which change detection strategy does the component use?"],
+      a: [
+        ["Default", "Default"],
+        [
+          "Kiểm tra cây component theo chu kỳ sự kiện/async: đơn giản nhưng tốn tài nguyên hơn khi cây lớn.",
+          "Checks component bindings across events/async turns: simple but costlier on large trees."
+        ]
+      ],
+      b: [
+        ["OnPush / Signals / Zoneless", "OnPush / Signals / Zoneless"],
+        [
+          "Chỉ kiểm tra khi input đổi tham chiếu, có sự kiện nội bộ hoặc Signal được đọc thay đổi.",
+          "Checks only when input references change, local events fire or read Signals update."
+        ]
+      ]
+    }
+  },
+  react: {
+    2: {
+      q: ["Có nhiều setState trong cùng một sự kiện?", "Several setState calls in the same event?"],
+      a: [
+        ["Có", "Yes"],
+        [
+          "React gộp (batch) thành một lượt render thống nhất với state mới nhất.",
+          "React batches them into a single render pass with the latest state."
+        ]
+      ],
+      b: [
+        ["Không", "No"],
+        [
+          "Thực hiện một lượt render cho cập nhật đó.",
+          "Runs a single render pass for that update."
+        ]
+      ]
+    },
+    3: {
+      q: ["Phần tử cũ và mới cùng type và key?", "Old and new elements share type and key?"],
+      a: [
+        ["Có", "Yes"],
+        [
+          "Giữ nguyên node và state hiện có, chỉ cập nhật props và phần tử con.",
+          "Preserves the existing node and state, updating only props and children."
+        ]
+      ],
+      b: [
+        ["Không", "No"],
+        [
+          "Unmount cây cũ và mount cây mới: state cũ của nhánh đó bị hủy.",
+          "Unmounts the old subtree and mounts a new one: prior state in that subtree resets."
+        ]
+      ]
+    }
+  },
+  next: {
+    0: {
+      q: ["Trang đã có trong cache (CDN / Full Route Cache)?", "Is the page already cached (CDN / Full Route Cache)?"],
+      a: [
+        ["HIT", "HIT"],
+        [
+          "Trả phản hồi đã lưu ngay lập tức, bỏ qua bước render lại ở server.",
+          "Serves the cached response immediately, skipping server re-rendering."
+        ]
+      ],
+      b: [
+        ["MISS", "MISS"],
+        [
+          "Đi tiếp qua App Router và render trên server, sau đó có thể lưu cache tùy cấu hình.",
+          "Proceeds through App Router and server rendering, optionally caching per route/fetch rules."
+        ]
+      ]
+    },
+    2: {
+      q: ["Route được quyết định là tĩnh hay động?", "Is the route resolved as static or dynamic?"],
+      a: [
+        ["Tĩnh / ISR", "Static / ISR"],
+        [
+          "Đã dựng sẵn lúc build hoặc tái tạo theo chu kỳ/tag để phục vụ nhanh.",
+          "Pre-rendered at build time or revalidated on schedule/tag for fast delivery."
+        ]
+      ],
+      b: [
+        ["Động (Dynamic)", "Dynamic"],
+        [
+          "Đọc cookies, headers, searchParams hoặc dữ liệu theo từng request nên render khi có yêu cầu.",
+          "Reads cookies, headers, searchParams or per-request data, so it renders on request."
+        ]
+      ]
+    }
+  }
+};
+
+var CT = {
+  "angular-1": {
+    h: [
+      ["Loại", "Type"],
+      ["Hướng dữ liệu", "Direction"],
+      ["Cập nhật khi", "Updates when"],
+      ["Nên dùng cho", "Best for"]
+    ],
+    r: [
+      ["{{ }}", ["Class → View", "Class → View"], ["Giá trị đổi", "Value changes"], ["Hiển thị văn bản", "Showing text"]],
+      ["[ ]", ["Class → thuộc tính", "Class → property"], ["Giá trị đổi", "Value changes"], ["Boolean, object, URL", "Boolean, object, URL"]],
+      ["( )", ["View → Class", "View → Class"], ["Sự kiện xảy ra", "Event fires"], ["click, input, submit", "click, input, submit"]],
+      ["[( )]", ["Hai chiều", "Two-way"], ["Cả hai phía đổi", "Either side changes"], ["Form đơn giản", "Simple forms"]]
+    ]
+  },
+  "angular-9": {
+    h: [
+      ["Operator", "Operator"],
+      ["Với yêu cầu cũ", "Old request"],
+      ["Thứ tự kết quả", "Result order"],
+      ["Dùng cho", "Use for"]
+    ],
+    r: [
+      ["switchMap", ["Hủy", "Cancel"], ["Chỉ lấy mới nhất", "Latest only"], ["Tìm kiếm tức thời", "Live search"]],
+      ["mergeMap", ["Chạy song song", "Run in parallel"], ["Không đảm bảo", "Not guaranteed"], ["Tải nhiều tệp", "Many uploads"]],
+      ["concatMap", ["Xếp hàng, chạy lần lượt", "Queue, run one by one"], ["Giữ đúng thứ tự", "Order kept"], ["Lưu dữ liệu theo thứ tự", "Ordered saves"]],
+      ["exhaustMap", ["Bỏ qua yêu cầu mới khi đang bận", "Ignore new ones while busy"], ["Chỉ lần đầu", "First only"], ["Nút Gửi, Đăng nhập", "Submit, Login buttons"]]
+    ]
+  },
+  "next-8": {
+    h: [
+      ["Cơ chế", "Mechanism"],
+      ["Phạm vi", "Scope"],
+      ["Vòng đời", "Lifetime"],
+      ["Làm mới bằng", "Refreshed by"]
+    ],
+    r: [
+      ["Request dedup / memo", "Server render", ["Trong một lượt render", "Within one render"], ["Kết thúc sau lượt render", "Ends after render"]],
+      ["Route / Data Cache", "Server / CDN", ["Qua nhiều yêu cầu", "Across requests"], ["revalidatePath, revalidateTag", "revalidatePath, revalidateTag"]],
+      ["Client Router Cache", "Browser", ["Trong phiên điều hướng", "During navigation session"], ["router.refresh()", "router.refresh()"]]
+    ]
+  }
+};
+
+var TY = {
+  angular: [
+    [
+      ["Standalone", "Tự khai báo imports, là chuẩn mặc định của Angular hiện đại.", "Declares its own imports; today's default in modern Angular.", "@Component({ selector: 'app-card', template: '...' })"],
+      ["NgModule-based", "Khai báo trong @NgModule, kiểu cũ thường gặp ở dự án legacy.", "Declared inside @NgModule, legacy style seen in older codebases.", "@NgModule({ declarations: [CardComponent] })"],
+      ["Smart / Presentational", "Smart làm việc với service/state; Presentational nhận input và phát output.", "Smart talks to services/state; Presentational takes inputs and emits outputs.", "@Input() item!: Item; @Output() picked = new EventEmitter<Item>();"]
+    ],
+    [
+      ["Interpolation {{ }}", "Class → view, hiển thị giá trị dạng chuỗi trong nội dung.", "Class → view, renders values as text content.", "<h1>{{ title }}</h1>"],
+      ["Property [ ]", "Class → thuộc tính DOM/component, giữ đúng kiểu dữ liệu.", "Class → DOM/component property, preserving data types.", "<button [disabled]='busy'>"],
+      ["Event ( )", "View → class, lắng nghe sự kiện người dùng.", "View → class, listens to user events.", "<button (click)='save($event)'>"],
+      ["Two-way [( )]", "Hai chiều, kết hợp property và event binding.", "Two-way binding combining property and event syntax.", "<input [(ngModel)]='name'>"]
+    ],
+    [
+      ["Structural", "Thay đổi cấu trúc DOM (thêm, xóa, lặp): @if, @for, *ngIf.", "Mutates DOM structure (add, remove, repeat): @if, @for, *ngIf.", "@if (ok) { <p>Yes</p> }"],
+      ["Attribute", "Đổi style hoặc class mà giữ nguyên cấu trúc DOM.", "Changes styling or attributes while keeping DOM structure.", "<p [class.active]='isActive'>"],
+      ["Custom", "Tự tạo bằng @Directive để tái sử dụng hành vi DOM.", "Custom @Directive to encapsulate reusable DOM behavior.", "@Directive({ selector: '[appHover]' })"]
+    ],
+    [
+      ["Built-in", "Có sẵn: date, currency, uppercase, json, slice.", "Built-in pipes: date, currency, uppercase, json, slice.", "{{ d | date:'short' }}"],
+      ["Pure (mặc định)", "Chỉ chạy lại khi đầu vào đổi, hiệu năng tốt.", "Default; reruns only when inputs change, efficient.", "@Pipe({ name: 'short' })"],
+      ["Impure", "Chạy mỗi lượt change detection, dùng cẩn trọng vì tốn chi phí.", "Runs on every change detection cycle; use sparingly.", "@Pipe({ name: 'f', pure: false })"],
+      ["async", "Tự subscribe Observable/Promise và dọn dẹp khi hủy.", "Subscribes to Observables/Promises and cleans up on destroy.", "{{ user$ | async }}"]
+    ],
+    [
+      ["Root singleton", "Một instance chung cho toàn ứng dụng.", "Single shared instance across the application.", "@Injectable({ providedIn: 'root' })"],
+      ["Component-scoped", "Instance riêng cho từng component, hủy khi component hủy.", "Scoped per component instance and destroyed with it.", "@Component({ providers: [CartService] })"],
+      ["Route-scoped", "Phạm vi cho một nhánh route, hợp với lazy loading.", "Scoped to a route branch, well suited to lazy loading.", "{ path: 'shop', providers: [ShopService], ... }"]
+    ],
+    [
+      ["inject() / constructor", "Xin phụ thuộc qua inject() (dùng được cả ngoài constructor) hoặc constructor.", "Request dependencies via inject() (works outside constructors too) or constructor.", "api = inject(UserService);"],
+      ["useClass", "Thay thế bằng một class khác (thường dùng khi test).", "Substitute another class implementation (common in tests).", "{ provide: Api, useClass: FakeApi }"],
+      ["useValue", "Cung cấp giá trị hằng/cấu hình qua InjectionToken.", "Provide a static value or config via an InjectionToken.", "{ provide: API_URL, useValue: '/api' }"],
+      ["useFactory", "Tạo giá trị bằng hàm factory có thể phụ thuộc provider khác.", "Construct a value using a factory function with dependencies.", "{ provide: Log, useFactory: () => new Log(env) }"]
+    ],
+    [
+      ["Static", "Đường dẫn cố định.", "Fixed route path.", "{ path: 'about', component: About }"],
+      ["Parameterized", "Có tham số động như :id đọc qua ActivatedRoute.", "Dynamic :id param accessed via ActivatedRoute.", "{ path: 'users/:id', component: User }"],
+      ["Nested (children)", "Route con render trong router-outlet của cha.", "Child routes rendered inside parent router-outlet.", "{ path: 'admin', children: [...] }"],
+      ["Redirect / Wildcard", "redirectTo điều hướng; ** bắt mọi đường dẫn không khớp (404).", "redirectTo forwards routes; ** catches unmatched paths (404).", "{ path: '**', component: NotFound }"]
+    ],
+    [
+      ["Template-driven", "Khai báo trực tiếp trong template với ngModel, hợp form đơn giản.", "Template-centric via ngModel, suited to simple forms.", "<input name='e' [(ngModel)]='email' required>"],
+      ["Reactive", "Quản lý form bằng FormGroup/FormControl trong code, dễ validate và test.", "Code-driven with FormGroup/FormControl, strong validation & testing.", "new FormControl('', { nonNullable: true, validators: [Validators.required] })"],
+      ["FormGroup / FormArray", "FormGroup nhóm control theo tên; FormArray quản lý mảng động.", "FormGroup groups named controls; FormArray manages dynamic lists.", "phones = new FormArray([new FormControl('')])"]
+    ],
+    [
+      ["signal()", "Giá trị reactive có thể ghi: đọc bằng s(), cập nhật bằng set/update.", "Writable reactive value: read with s(), update via set/update.", "const n = signal(0); n.set(1);"],
+      ["computed()", "Giá trị dẫn xuất tự tính lại khi Signal nguồn thay đổi.", "Derived read-only value that recomputes when source Signals change.", "const dbl = computed(() => n() * 2);"],
+      ["effect()", "Chạy tác vụ phụ khi Signal đổi, không trả về giá trị.", "Runs side effects when Signals change; returns no value.", "effect(() => { console.log(n()); });"]
+    ],
+    [
+      ["Cold", "Mỗi subscriber nhận luồng riêng (HTTP Observable gọi lại khi subscribe).", "Each subscriber gets its own stream execution (HTTP retries on subscribe).", "this.http.get('/api/a')"],
+      ["Hot (Subject)", "Chia sẻ một nguồn phát chung cho nhiều subscriber.", "Shares a single emission source across multiple subscribers.", "const s = new Subject<string>();"],
+      ["BehaviorSubject", "Hot Subject có giá trị hiện tại, subscriber mới nhận ngay giá trị mới nhất.", "Hot Subject holding current value; new subscribers receive it immediately.", "new BehaviorSubject<User|null>(null)"],
+      ["switchMap / mergeMap / concatMap / exhaustMap", "Điều phối luồng bất đồng bộ theo nhu cầu hủy cũ, song song, tuần tự hoặc bỏ qua khi bận.", "Coordinate async streams for cancel-previous, parallel, sequential or ignore-while-busy.", "click$.pipe(exhaustMap(() => api.save()))"]
+    ],
+    [
+      ["loadComponent", "Tải lười một standalone component cho route.", "Lazily loads a single standalone component for a route.", "loadComponent: () => import('./a').then(m => m.A)"],
+      ["loadChildren", "Tải lười một nhóm route con.", "Lazily loads a child route configuration.", "loadChildren: () => import('./admin.routes')"],
+      ["@defer", "Hoãn tải/render một khối template theo điều kiện (on viewport, on idle).", "Defers loading/rendering a template block on triggers (on viewport, on idle).", "@defer (on viewport) { <app-chart/> }"],
+      ["Preloading", "Tải trước lazy route khi rảnh để chuyển trang mượt hơn.", "Preloads lazy routes when idle for faster transitions.", "provideRouter(routes, withPreloading(PreloadAllModules))"]
+    ]
+  ],
+  react: [
+    [
+      ["Thẻ HTML (chữ thường)", "Tạo phần tử DOM gốc của trình duyệt.", "Creates native browser DOM elements.", "<div className='box'/>"],
+      ["Thẻ Component (chữ hoa)", "Gọi hàm component React của bạn.", "Invokes your React component function.", "<Card title='A'/>"],
+      ["Fragment", "Nhóm các phần tử con mà không thêm thẻ bọc DOM thừa.", "Groups child elements without adding extra DOM wrapper nodes.", "<><Header/><Main/></>"],
+      ["Render có điều kiện", "Dùng toán tử logic (&&) hoặc toán tử điều kiện (? :) để rẽ nhánh UI.", "Use logical (&&) or conditional (? :) expressions to branch UI.", "{ok ? <A/> : <B/>}"]
+    ],
+    [
+      ["Function component", "Hàm nhận props và dùng hooks, là cách chuẩn hiện nay.", "Function taking props and using hooks; today's standard.", "const A = () => <p/>;"],
+      ["Class component", "Kiểu cũ dùng this.state và lifecycle methods.", "Legacy pattern using this.state and lifecycle methods.", "class A extends Component { render(){...} }"],
+      ["Higher-Order Component", "Hàm bọc component để thêm hành vi; nay thường thay bằng custom hook.", "Function wrapping a component to add behavior; often replaced by hooks.", "const Safe = withAuth(Page);"]
+    ],
+    [
+      ["Dữ liệu", "Truyền giá trị như chuỗi, số, mảng, object xuống component con.", "Pass values such as strings, numbers, arrays or objects to children.", "<User name='Lan' age={20}/>"],
+      ["Callback", "Truyền hàm từ cha xuống con để con thông báo sự kiện ngược lên.", "Pass a function from parent to child so the child notifies events upward.", "<Button onClick={save}/>"],
+      ["children", "Truyền nội dung lồng bên trong thẻ để dựng layout hoặc wrapper.", "Pass nested content between tags for layouts and wrappers.", "<Card><p>Hi</p></Card>"]
+    ],
+    [
+      ["Nguyên thủy", "Số, chuỗi, boolean cập nhật trực tiếp qua setter.", "Primitives like numbers, strings and booleans updated directly.", "const [on, setOn] = useState(false);"],
+      ["Object / Mảng", "Tạo object/mảng mới khi cập nhật để giữ tính bất biến.", "Create new objects/arrays on update to preserve immutability.", "setList([...list, item]);"],
+      ["Cập nhật theo hàm", "Dùng prevState khi tính giá trị mới dựa trên giá trị trước đó.", "Use prevState when next state depends on the previous state.", "setN(n => n + 1);"]
+    ],
+    [
+      ["Không có mảng phụ thuộc", "Chạy sau mỗi lượt render.", "Runs after every render commit.", "useEffect(() => { log(); });"],
+      ["Mảng rỗng [ ]", "Chạy một lần sau lần mount đầu tiên.", "Runs once after initial mount.", "useEffect(() => { init(); }, []);"],
+      ["Có phụ thuộc [a, b]", "Chạy lại khi a hoặc b thay đổi giữa các lần render.", "Reruns when a or b changes across renders.", "useEffect(() => { load(id); }, [id]);"],
+      ["Có hàm cleanup", "Trả về hàm dọn dẹp (clearInterval, unsubscribe, abort controller).", "Return a cleanup function (clearInterval, unsubscribe, AbortController).", "return () => ws.close();"]
+    ],
+    [
+      ["key ổn định (id)", "Gắn với định danh duy nhất của dữ liệu; tốt nhất khi danh sách đổi thứ tự/thêm/xóa.", "Tied to unique item ID; best when items reorder, insert or delete.", "<li key={u.id}>"],
+      ["key = index", "Chỉ phù hợp danh sách tĩnh không đổi thứ tự hoặc chèn/xóa đầu/giữa.", "Only safe for static lists without insert/delete/reorder.", "<li key={i}>"],
+      ["Tránh key ngẫu nhiên", "Tạo key mới mỗi lần render làm mất state và mount lại node liên tục.", "Generating new keys per render destroys state and remounts nodes.", "// Avoid key={Math.random()}"]
+    ],
+    [
+      ["Giá trị tĩnh / cấu hình", "Chia sẻ theme, ngôn ngữ hoặc cấu hình ít đổi.", "Share theme, locale or infrequent configuration.", "<Ctx.Provider value='dark'>"],
+      ["State + updater", "Truyền state và hàm cập nhật xuống nhánh con cần dùng.", "Pass state and updater helpers down to consuming subtrees.", "value={{ user, setUser }}"],
+      ["Context + useReducer", "Kết hợp reducer và Context cho luồng trạng thái có nhiều action.", "Combine reducer and Context for action-driven subtree state.", "dispatch({ type: 'add', item })"]
+    ],
+    [
+      ["State hook", "Đóng gói trạng thái lặp lại như toggle, modal, input.", "Encapsulate recurring UI state such as toggles or modals.", "const [on, toggle] = useToggle();"],
+      ["Async / Data hook", "Gói logic lấy dữ liệu, trạng thái loading và lỗi.", "Encapsulate data fetching, loading and error states.", "const { data, error } = useFetch(url);"],
+      ["Subscription hook", "Đăng ký sự kiện trình duyệt/resize/media query và dọn dẹp gọn gàng.", "Subscribe to browser/resize/media events with clean teardown.", "const w = useWindowWidth();"]
+    ],
+    [
+      ["memo mặc định", "So sánh nông từng prop trước khi render lại component.", "Shallow-compares each prop before re-rendering the component.", "memo(Row)"],
+      ["memo + comparator", "Tùy biến hàm so sánh props khi cần kiểm soát chặt hơn.", "Custom comparator function for tailored equality checks.", "memo(Row, (a, b) => a.id === b.id)"]
+    ],
+    [
+      ["useMemo", "Ghi nhớ giá trị tính toán khi dependencies chưa đổi.", "Memoize a computed value until dependencies change.", "const total = useMemo(() => sum(items), [items]);"],
+      ["useCallback", "Ghi nhớ tham chiếu hàm khi truyền xuống component được memo hóa.", "Memoize a function reference passed to memoized children.", "const onPick = useCallback(id => select(id), []);"]
+    ],
+    [
+      ["Cho dữ liệu / stream", "Hiển thị fallback khi nhánh con đang chờ dữ liệu hỗ trợ Suspense.", "Show fallback while child branches wait on Suspense-integrated data.", "<Suspense fallback={<Skeleton/>}><Feed/></Suspense>"],
+      ["Cho code (React.lazy)", "Hiển thị fallback khi tải lazy chunk của component.", "Show fallback while a lazy component chunk is loading.", "const Chart = lazy(() => import('./Chart'));"],
+      ["Lồng nhau", "Đặt nhiều ranh giới để từng khu vực hiện độc lập.", "Nest boundaries so independent sections resolve separately.", "<Suspense><Suspense>...</Suspense></Suspense>"]
+    ],
+    [
+      ["useTransition", "Đánh dấu cập nhật không khẩn cấp kèm trạng thái isPending.", "Mark updates as non-urgent with an isPending indicator.", "const [pending, start] = useTransition();"],
+      ["startTransition", "Gọi ngoài hook khi cần đánh dấu cập nhật chuyển đổi.", "Standalone transition helper when not using hook state.", "startTransition(() => setTab(2));"],
+      ["useDeferredValue", "Trì hoãn một giá trị để giữ giao diện phản hồi mượt khi lọc/tìm kiếm lớn.", "Defer a value to keep typing smooth during heavy filtering/search.", "const q = useDeferredValue(text);"]
+    ]
+  ],
+  next: [
+    [
+      ["Static segment", "Thư mục cố định ánh xạ trực tiếp tới đường dẫn.", "Fixed folder mapping directly to a URL path.", "app/about/page.tsx → /about"],
+      ["Dynamic [slug]", "Tham số động một đoạn đường dẫn.", "Single dynamic URL segment.", "app/blog/[slug]/page.tsx"],
+      ["Catch-all [...slug]", "Khớp nhiều đoạn đường dẫn; [[...slug]] khớp cả route gốc.", "Matches multiple segments; [[...slug]] also matches root.", "app/docs/[...slug]/page.tsx"],
+      ["Route group (name)", "Nhóm thư mục tổ chức layout mà không thêm đoạn vào URL.", "Organizes layouts without adding a segment to the URL.", "app/(shop)/cart/page.tsx → /cart"]
+    ],
+    [
+      ["href tĩnh", "Liên kết tới đường dẫn cố định.", "Link to a static path.", "<Link href='/about'>"],
+      ["href động", "Ghép đường dẫn hoặc query object động.", "Dynamic path string or URL object.", "<Link href={{ pathname: '/p', query: { id } }}>"],
+      ["useRouter", "Điều hướng lập trình trong Client Component sau một hành động.", "Programmatic navigation inside Client Components after an action.", "router.push('/dashboard');"]
+    ],
+    [
+      ["Ảnh import nội bộ", "Tự nhận kích thước và hỗ trợ placeholder blur.", "Infers dimensions automatically and supports blur placeholders.", "import hero from './hero.jpg'; <Image src={hero} alt=''/>"],
+      ["Ảnh từ xa", "Khai báo kích thước và cấu hình images.remotePatterns trong next.config.", "Specify dimensions and configure images.remotePatterns in next.config.", "<Image src='https://cdn.x.com/a.jpg' width={400} height={300} alt=''/>"],
+      ["Chế độ fill", "Lấp đầy khung cha có position relative khi kích thước linh động.", "Fill a positioned parent container when dimensions adapt.", "<Image src={u} fill sizes='100vw' alt=''/>"]
+    ],
+    [
+      ["Static rendering", "Dựng sẵn lúc build hoặc tái tạo định kỳ/theo tag, phục vụ nhanh.", "Pre-rendered at build or revalidated on schedule/tag for fast delivery.", "// static / ISR route"],
+      ["Dynamic rendering", "Render theo từng yêu cầu khi dùng cookies, headers hoặc searchParams.", "Rendered per request when reading cookies, headers or searchParams.", "const c = await cookies();"]
+    ],
+    [
+      ["Server Component fetch", "Lấy dữ liệu trực tiếp trên server, giữ secret an toàn và giảm JS client.", "Fetch on the server, keep secrets safe and reduce client JS bundle.", "const r = await fetch(url);"],
+      ["Client query library", "Dùng SWR hoặc TanStack Query cho dữ liệu tương tác/realtime phía client.", "Use SWR or TanStack Query for client-side interactive or live queries.", "const { data } = useSWR('/api/me');"],
+      ["Server Action", "Thực thi mutation/ghi dữ liệu trên server thay vì tự tạo endpoint thủ công.", "Run server mutations directly instead of hand-writing boilerplate endpoints.", "<form action={save}>"]
+    ],
+    [
+      ["Tương tác client", "State, event handler, animation hoặc tương tác trực tiếp trên trình duyệt.", "State, event handlers and direct browser interactions.", "'use client'; const [n,setN]=useState(0)"],
+      ["Browser APIs", "Truy cập window, document, localStorage hoặc geolocation.", "Access window, document, localStorage or geolocation.", "useEffect(() => { localStorage.setItem('theme', 'dark'); }, [])"],
+      ["Composition (children)", "Truyền Server Component qua props/children vào Client shell.", "Pass Server Components via props/children into Client shells.", "<ClientShell><ServerList/></ClientShell>"]
+    ],
+    [
+      ["Inline Server Action", "Khai báo 'use server' bên trong hàm async ở Server Component.", "Declare 'use server' inside an async function within a Server Component.", "async function a(){ 'use server'; }"],
+      ["Module 'use server'", "Đặt 'use server' ở đầu file để import action vào Client Component.", "Place 'use server' at the top of a file to call actions from Client Components.", "// actions.ts: 'use server'; export async function a(){}"],
+      ["useActionState", "Theo dõi kết quả, lỗi và trạng thái pending của Server Action.", "Track action state, errors and pending status in React.", "const [state, run, pending] = useActionState(a, init)"]
+    ],
+    [
+      ["GET handler", "Xử lý yêu cầu đọc dữ liệu và trả Response/JSON.", "Handle read requests and return a Response/JSON payload.", "export async function GET() {...}"],
+      ["POST / PUT / DELETE", "Xử lý ghi, cập nhật, xóa hoặc webhook từ dịch vụ bên ngoài.", "Handle mutations or external webhooks.", "export async function POST(req: Request) { const body = await req.json(); return Response.json({ received: body }); }"],
+      ["Dynamic route handler", "Đọc tham số động từ URL như /api/posts/[id] (await params).", "Read dynamic URL params such as /api/posts/[id] (await params).", "export async function GET(_req: Request, ctx: { params: Promise<{ id: string }> }) { const { id } = await ctx.params; return Response.json({ id }); }"]
+    ],
+    [
+      ["Request dedup / memo", "Gộp các lời gọi giống nhau trong một lượt render trên server.", "Deduplicate identical calls within a single server render pass.", "await Promise.all([getUser(id), getUser(id)])"],
+      ["Revalidation (path/tag)", "Làm mới dữ liệu/trang theo chu kỳ hoặc theo yêu cầu khi dữ liệu đổi.", "Refresh cached routes/data on a schedule or on demand after mutations.", "revalidateTag('posts', 'max')"],
+      ["Client Router Cache", "Lưu dữ liệu trang đã điều hướng ở client trong phiên làm việc.", "Cache visited route payloads on the client during a session.", "router.refresh();"]
+    ],
+    [
+      ["loading.tsx", "Tự động tạo ranh giới chờ cho segment route tương ứng.", "Automatically wraps a route segment with a loading fallback.", "app/blog/loading.tsx"],
+      ["<Suspense> thủ công", "Khoanh vùng chờ chính xác cho từng khối dữ liệu chậm.", "Target a specific slow data region while keeping the rest visible.", "<Suspense fallback={<Skeleton/>}><Comments/></Suspense>"]
+    ]
+  ]
+};
+
+var EX = {
+  angular: [],
+  react: [],
+  next: [],
+  network: [
+    [
+      ["Hiểu hành trình yêu cầu mạng từ tên miền tới máy chủ và trình duyệt.", "Understand how a request travels from domain name to server and browser."],
+      ["DNS phân giải tên miền, TCP/QUIC thiết lập kết nối, TLS mã hóa phiên truyền, HTTP truyền tải dữ liệu.", "DNS resolves hostnames, TCP/QUIC opens connections, TLS encrypts traffic and HTTP transfers payloads."],
+      ["Mở trang HTTPS: DNS → TCP/TLS 1.3 → HTTP/2 hoặc HTTP/3 tải HTML, CSS, JS và API.", "Opening an HTTPS page: DNS → TCP/TLS 1.3 → HTTP/2 or HTTP/3 fetches HTML, CSS, JS and APIs."]
+    ],
+    [
+      ["Chọn nơi lưu trữ dữ liệu phía client phù hợp với yêu cầu bảo mật và vòng đời.", "Choose client storage matching security requirements and data lifetime."],
+      ["Cookie đi kèm request theo quy tắc domain/path/SameSite; localStorage và sessionStorage chỉ đọc bằng JS.", "Cookies travel with matching requests per domain/path/SameSite; localStorage and sessionStorage are JS-only."],
+      ["Lưu session ID trong cookie HttpOnly; lưu lựa chọn giao diện không nhạy cảm vào localStorage.", "Store session IDs in HttpOnly cookies; store non-sensitive UI preferences in localStorage."]
+    ],
+    [
+      ["Cho phép gọi tài nguyên hợp lệ giữa các origin khác nhau mà vẫn an toàn.", "Enable legitimate cross-origin requests safely."],
+      ["Trình duyệt gửi preflight OPTIONS trước một số request phức tạp và kiểm tra header Access-Control-* ở phản hồi.", "Browsers send an OPTIONS preflight before certain non-simple requests and verify Access-Control-* headers."],
+      ["Frontend ở https://shop.vn gọi API ở https://api.shop.vn với header Authorization qua preflight được phép.", "Frontend at https://shop.vn calls https://api.shop.vn with an Authorization header after preflight approval."]
+    ],
+    [
+      ["Tối ưu đường dẫn hiển thị ban đầu và tránh tính toán layout dư thừa.", "Optimize initial rendering path and avoid unnecessary layout work."],
+      ["Trình duyệt dựng DOM và CSSOM, kết hợp thành Render Tree rồi chạy Layout, Paint và Composite.", "Browsers build DOM and CSSOM, form a Render Tree and run Layout, Paint and Composite."],
+      ["Đo kích thước khung trước rồi mới áp class thay đổi hiển thị thay vì xen kẽ đọc/ghi layout liên tục.", "Measure layout boxes before applying visual classes instead of interleaving reads and writes."]
+    ],
+    [
+      ["Bảo vệ người dùng và dữ liệu trước các kiểu tấn công phổ biến trên web.", "Protect users and application state against common web attack vectors."],
+      ["Ngăn thực thi script không tin cậy (XSS), chặn giả mạo request mang cookie (CSRF) và cấm nhúng frame trái phép (Clickjacking).", "Block untrusted script execution (XSS), forged cookie-backed requests (CSRF) and unauthorized framing (Clickjacking)."],
+      ["Dùng cookie SameSite=Lax + HttpOnly, làm sạch nội dung rich-text và đặt frame-ancestors 'none'.", "Use SameSite=Lax + HttpOnly cookies, sanitize rich text and set frame-ancestors 'none'."]
+    ],
+    [
+      ["Cấu hình header bảo mật ở tầng web server / CDN / ứng dụng.", "Enforce browser security headers at the web server, CDN or app layer."],
+      ["Header CSP giới hạn nguồn script/style/frame; HSTS ép buộc HTTPS; X-Content-Type-Options chặn MIME sniffing.", "CSP restricts script/style/frame sources; HSTS enforces HTTPS; X-Content-Type-Options blocks MIME sniffing."],
+      ["Bật CSP kèm nonce cho inline script và HSTS cho toàn bộ tên miền chính và tên miền phụ.", "Enable CSP with a script nonce and HSTS across the apex domain and subdomains."]
+    ]
+  ],
+  jsts: [
+    [
+      ["Nắm cách JavaScript quản lý phạm vi biến và ngăn xếp lời gọi hàm.", "Understand how JavaScript manages execution scopes and the call stack."],
+      ["Mỗi lần gọi hàm tạo khung thực thi trên Call Stack; khi hàm kết thúc, khung được đẩy ra khỏi stack.", "Each function call pushes an execution frame onto the Call Stack and pops it upon completion."],
+      ["Hàm tính tổng gọi hàm định dạng tiền tệ; kết thúc hàm con trước rồi quay lại hàm cha.", "A total formatter invokes a currency helper; the helper frame pops before the parent returns."]
+    ],
+    [
+      ["Cập nhật dữ liệu không làm biến đổi trực tiếp đối tượng hoặc mảng cũ.", "Update state without mutating existing objects or arrays in place."],
+      ["Trả về object/mảng mới với các trường cập nhật giúp so sánh tham chiếu nhanh và rõ ràng.", "Returning new objects/arrays with updated fields keeps reference checks fast and predictable."],
+      ["Thêm sản phẩm vào giỏ bằng [...items, newItem] thay vì gọi items.push(newItem) trực tiếp.", "Add a cart item via [...items, newItem] instead of mutating items.push(newItem) in place."]
+    ],
+    [
+      ["Hiểu thứ tự thực thi bất đồng bộ trên luồng đơn của JavaScript.", "Understand asynchronous scheduling on JavaScript's single thread."],
+      ["Sau khi Call Stack rỗng, toàn bộ microtask chạy hết trước khi lấy một macrotask kế tiếp.", "Once the Call Stack clears, all microtasks run before the next macrotask is dequeued."],
+      ["Promise.resolve().then(...) chạy trước setTimeout(..., 0) sau khi mã đồng bộ kết thúc.", "Promise.resolve().then(...) executes before setTimeout(..., 0) once synchronous code finishes."]
+    ],
+    [
+      ["Tận dụng closure và hiểu ngữ cảnh `this` cũng như kế thừa prototype.", "Use closures effectively and understand `this` binding and prototype chains."],
+      ["Closure giữ tham chiếu tới biến ngoài scope; giá trị `this` phụ thuộc cách gọi hàm.", "Closures capture outer lexical bindings; `this` depends on how a function is invoked."],
+      ["Tạo hàm debounce bằng closure giữ timerId giữa các lần gọi liên tiếp.", "Build a debounce helper using a closure that retains timerId across calls."]
+    ],
+    [
+      ["Khai báo kiểu dữ liệu rõ ràng và thu hẹp kiểu an toàn trong TypeScript.", "Define clear types and narrow union types safely in TypeScript."],
+      ["TypeScript kiểm tra điều kiện rẽ nhánh (status, typeof, in) để biết chính xác kiểu trong từng nhánh.", "TypeScript inspects branch checks (status, typeof, in) to narrow types in each branch."],
+      ["Khi s.status === 'success', TypeScript tự hiểu s.data tồn tại và có kiểu dữ liệu tương ứng.", "When s.status === 'success', TypeScript narrows s.data to its concrete payload type."]
+    ],
+    [
+      ["Tăng khả năng tái sử dụng và an toàn kiểu với Generics, Utility Types và unknown.", "Improve reuse and type safety with Generics, Utility Types and unknown."],
+      ["Generic <T> giữ liên kết kiểu giữa đầu vào và đầu ra; unknown buộc kiểm tra kiểu trước khi dùng.", "Generics <T> preserve type relationships across inputs/outputs; unknown requires narrowing before use."],
+      ["Dùng Partial<Pick<User, 'name'>> cho form sửa tên và kiểm tra kiểu trước khi dùng kết quả parseJson.", "Use Partial<Pick<User, 'name'>> for a name-edit form and narrow unknown before reading fields."]
+    ]
+  ],
+  perf: [
+    [
+      ["Đo và cải thiện trải nghiệm tải, phản hồi tương tác và độ ổn định bố cục.", "Measure and improve loading speed, interaction latency and visual stability."],
+      ["LCP đo tốc độ hiện khối chính; INP đo độ trễ phản hồi thao tác; CLS đo mức dịch chuyển giao diện.", "LCP tracks main content paint; INP tracks interaction delay; CLS tracks unexpected layout shifts."],
+      ["Cố định kích thước banner và tách tác vụ nặng khỏi luồng nhập liệu giúp LCP và INP cải thiện rõ rệt.", "Reserve banner dimensions and yield heavy work off the input path to improve LCP and INP."]
+    ],
+    [
+      ["Tận dụng cache HTTP hợp lý để tăng tốc độ tải và giảm tải cho máy chủ.", "Use HTTP caching effectively to speed up loads and reduce origin load."],
+      ["Tài nguyên có tên hash dùng max-age dài + immutable; tài nguyên đổi nội dung dùng revalidation/no-cache.", "Content-hashed assets use long max-age + immutable; mutable resources use revalidation or no-cache."],
+      ["Trình duyệt dùng lại bundle JS từ cache lần đầu, chỉ kiểm tra lại file HTML khi vào trang mới.", "The browser reuses cached JS bundles across visits while revalidating HTML cleanly."]
+    ],
+    [
+      ["Giảm dung lượng JavaScript ban đầu bằng chia nhỏ mã và loại bỏ mã thừa.", "Reduce initial JavaScript payload via code splitting and dead-code elimination."],
+      ["Dynamic import tách module thành chunk riêng; bundler loại bỏ export không dùng khi build.", "Dynamic import splits code into separate chunks; bundlers prune unused exports during build."],
+      ["Chỉ tải module biểu đồ nặng khi người dùng mở tab thống kê thay vì nhúng ngay từ trang chủ.", "Load a heavy chart module only when opening the analytics tab instead of on initial landing."]
+    ],
+    [
+      ["Tối ưu cấu trúc HTML, metadata và dữ liệu có cấu trúc cho công cụ tìm kiếm.", "Optimize HTML output, metadata and structured data for search indexing."],
+      ["Cung cấp nội dung có ý nghĩa trong HTML, khai báo canonical rõ ràng, metadata đầy đủ và JSON-LD.", "Serve meaningful HTML content, clear canonical URLs, accurate metadata and JSON-LD."],
+      ["Mỗi bài viết có thẻ title, meta description, Open Graph và URL canonical riêng biệt.", "Each article exposes its own title, meta description, Open Graph tags and canonical URL."]
+    ],
+    [
+      ["Theo dõi hiệu năng cả ở môi trường kiểm thử chuẩn lẫn phiên dùng thực tế.", "Monitor performance across both controlled checks and real user traffic."],
+      ["RUM ghi nhận trải nghiệm thật của người dùng; Synthetic chạy kịch bản định kỳ để so sánh chuẩn.", "RUM captures real user sessions; Synthetic runs scheduled checks for consistent baselines."],
+      ["Phát hiện trang chậm riêng trên mạng di động ở một khu vực nhờ dữ liệu RUM phân theo thiết bị/mạng.", "Spot slowness on mobile networks in a specific region using RUM device and connection dimensions."]
+    ],
+    [
+      ["Liên kết sự kiện lỗi và hiệu năng giữa front-end và backend để gỡ lỗi nhanh.", "Correlate front-end and backend errors and traces for faster root-cause analysis."],
+      ["Gửi kèm mã định danh yêu cầu/trace và ghi nhận ngữ cảnh phiên bản, route, hành động người dùng.", "Attach request/trace IDs and record release version, route and user action context."],
+      ["Khi API trả lỗi 500, kỹ sư tra đúng traceId để xem log xử lý tương ứng trên máy chủ.", "When an API returns 500, engineers look up the matching traceId to inspect server logs."]
+    ]
+  ],
+  ops: [
+    [
+      ["Chuẩn hóa chất lượng mã, kiểm tra kiểu và khóa phiên bản phụ thuộc trước khi build.", "Standardize code quality, type safety and dependency versions before building."],
+      ["Lint/format giữ quy tắc đồng nhất, tsc kiểm tra kiểu tĩnh và lockfile đảm bảo cài đặt giống nhau.", "Linters/formatters enforce rules, tsc checks static types and lockfiles keep installs deterministic."],
+      ["Chạy lint, tsc --noEmit và unit test tự động trước khi cho phép merge pull request.", "Run lint, tsc --noEmit and unit tests automatically before allowing PR merges."]
+    ],
+    [
+      ["Xây dựng chiến lược kiểm thử nhiều tầng phù hợp với từng loại logic và giao diện.", "Structure multi-layer testing across logic, UI components and end-to-end flows."],
+      ["Unit test kiểm tra logic độc lập, component test kiểm tra tương tác UI, E2E kiểm tra luồng thực tế.", "Unit tests verify isolated logic, component tests verify UI interactions and E2E tests verify real flows."],
+      ["Viết unit test cho hàm tính giá, component test cho form đăng nhập và E2E cho luồng đặt hàng.", "Write unit tests for pricing helpers, component tests for login forms and E2E tests for checkout."]
+    ],
+    [
+      ["Tự động hóa kiểm tra và tạo môi trường preview cho từng thay đổi mã nguồn.", "Automate verification and spin up preview environments for code changes."],
+      ["Pipeline CI chạy test/build trên mỗi lần đẩy code; preview deployment tạo bản xem thử cô lập.", "CI runs checks/builds on pushes; preview deployments create isolated review environments."],
+      ["Mở PR mới → CI chạy xong → có đường dẫn preview để đội ngũ kiểm tra trực tiếp.", "Open a PR → CI passes → a preview URL is ready for team review."]
+    ],
+    [
+      ["Quản lý biến môi trường an toàn giữa các giai đoạn phát triển, staging và production.", "Manage environment configuration safely across development, staging and production."],
+      ["Tách biệt biến cấu hình theo môi trường và chỉ cho phép biến công khai xuất hiện ở mã client.", "Separate config per environment and expose only explicitly public variables to client code."],
+      ["Khóa bí mật ký token chỉ nằm ở server, còn URL API công khai cấu hình theo từng môi trường.", "Keep signing secrets strictly on the server while configuring API base URLs per environment."]
+    ],
+    [
+      ["Giảm thiểu rủi ro khi đưa bản mới lên production và khôi phục nhanh khi có sự cố.", "Minimize production release risk and recover quickly if regressions occur."],
+      ["Rollback đưa về bản ổn định trước đó; Blue-Green chuyển lưu lượng giữa hai môi trường; Canary mở dần tỷ lệ.", "Rollback reverts to a prior healthy release; Blue-Green switches traffic; Canary ramps gradually."],
+      ["Chuyển 10% lưu lượng sang bản canary, theo dõi lỗi trong vài phút rồi mở rộng hoặc rollback ngay.", "Route 10% traffic to canary, monitor errors briefly and either ramp up or roll back immediately."]
+    ],
+    [
+      ["Xác nhận hệ thống ổn định sau khi triển khai và sẵn sàng hành động nếu lệch ngưỡng.", "Verify post-deploy health and act quickly if thresholds drift."],
+      ["Kiểm tra trạng thái các route chính, log lỗi và chỉ số hiệu năng ngay sau khi hoàn tất release.", "Check critical routes, error logs and performance signals immediately after release cutover."],
+      ["Sau khi deploy, xác minh trang chủ/API phản hồi bình thường và không phát sinh lỗi bất thường.", "After deploy, confirm home/API endpoints respond cleanly with no spike in runtime errors."]
+    ]
+  ]
+};
+
+var FX = {
+  angular: [
+    [
+      "Browser",
+      "bootstrapApplication(AppComponent, {\n  providers: [provideRouter(routes), provideHttpClient()]\n});"
+    ],
+    [
+      "Build (ng build)",
+      "<h3>{{ count }}</h3>\n→ AOT template compiled into optimized instructions"
+    ],
+    [
+      "Browser",
+      "URL /users/7 → matches route 'users/:id'\n→ runs guards → resolves params (id = '7')"
+    ],
+    [
+      "Browser",
+      "new UserComponent()\n→ inject(UserService) → initial template render"
+    ],
+    [
+      "Browser",
+      "event / HTTP / signal change\n→ evaluate affected bindings (Default / OnPush / Zoneless)"
+    ],
+    [
+      "Browser",
+      "<h3>Lan</h3>: updated DOM text node\nunrelated nodes stay untouched"
+    ]
+  ],
+  react: [
+    [
+      "Build (Babel/SWC)",
+      "<h1>Hi</h1>\n→ jsx('h1', { children: 'Hi' })"
+    ],
+    [
+      "Browser",
+      "{\n  type: 'ul',\n  props: { children: [{ type: 'li', key: 1 }, { type: 'li', key: 2 }] }\n}"
+    ],
+    [
+      "Browser",
+      "onClick → setN(1)\n→ React schedules & batches re-render of Counter"
+    ],
+    [
+      "Browser",
+      "prev: li#1, li#2  vs  next: li#1, li#2, li#3\n→ diff identifies minimal patch: insert li#3"
+    ],
+    [
+      "Browser",
+      "domNode.appendChild(li3)\n→ commit DOM → run useLayoutEffect / useEffect"
+    ]
+  ],
+  next: [
+    [
+      "Network",
+      "GET /blog/hello\n→ check static/ISR cache & run middleware if configured"
+    ],
+    [
+      "Server",
+      "app/layout.tsx\n  → app/blog/[slug]/page.tsx (slug = 'hello')"
+    ],
+    [
+      "Server",
+      "const post = await getPost('hello');\n→ render Server Components to HTML + RSC payload"
+    ],
+    [
+      "Network",
+      "stream initial HTML chunks first\n→ <Suspense> fallback swaps when slow data resolves"
+    ],
+    [
+      "Browser",
+      "load client chunk for 'use client' nodes\n→ hydrateRoot() attaches interactive handlers"
+    ],
+    [
+      "Browser",
+      "click <Link href='/blog'>\n→ fetch RSC payload for changed segments without full reload"
+    ]
+  ],
+  network: [
+    ["Network", "example.com → DNS A/AAAA lookup → TCP/QUIC connect"],
+    ["Network", "ClientHello → Server cert & TLS 1.3 handshake"],
+    ["Browser", "Check SameSite cookie rules & CORS preflight if cross-origin"],
+    ["Browser", "Parse HTML → DOM and CSS → CSSOM -> Render Tree"],
+    ["Browser", "Layout (box geometry) → Paint → GPU Composite"]
+  ],
+  jsts: [
+    ["Browser", "push global frame → push fn() frame → return & pop frame"],
+    ["Browser", "Call Stack empty → run all Microtasks (Promise.then, queueMicrotask)"],
+    ["Browser", "Browser paint / frame opportunity when needed"],
+    ["Browser", "Dequeue next Macrotask (setTimeout, UI event) → repeat"]
+  ],
+  perf: [
+    ["Browser", "Measure LCP, INP, CLS & network waterfall on real/lab runs"],
+    ["Build", "Split lazy chunks, tree-shake unused exports, set Cache-Control"],
+    ["Server", "Verify SSR/SSG HTML, metadata, canonical, JSON-LD, robots & sitemap"],
+    ["Network", "Track RUM & error/trace alerts across releases"]
+  ],
+  ops: [
+    ["Build", "lint + format + tsc --noEmit + unit/component tests"],
+    ["Build", "CI production build → deploy isolated PR preview URL"],
+    ["Network", "Promote to staging or route canary / blue-green traffic"],
+    ["Server", "Confirm health & error rate → keep release or roll back"]
+  ]
+};
+
+/**
+ * Helper to populate framework card items and examples cleanly.
+ */
+function B(k, P) {
+  var f = FW[k];
+  var oi = [];
+  f.lv.forEach(function (v) {
+    v.i.forEach(function (item) {
+      oi.push(item);
+    });
+  });
+  var oe = EX[k];
+  var ne = [];
+  f.lv.forEach(function (v, j) {
+    v.i = [];
+    P[j].forEach(function (r) {
+      if (typeof r === "number") {
+        v.i.push(oi[r]);
+        ne.push(oe[r]);
+      } else {
+        v.i.push({ t: r[0], d: r[1], code: r[5] });
+        ne.push([r[2], r[3], r[4]]);
+      }
+    });
+  });
+  EX[k] = ne;
+}
+
+/**
+ * Append a detailed card with purpose/mechanism/usage and optional classifications.
+ */
+function A(k, j, r) {
+  FW[k].lv[j].i.push({
+    t: r[0],
+    d: r[1],
+    code: r[5],
+    x: [r[2], r[3], r[4]],
+    ty: r[6]
+  });
+}
+
+// Populate Angular cards
+B("angular", [
+  [
+    [
+      ["Component", "Component"],
+      ["Khối giao diện gồm lớp TypeScript, template HTML và style (standalone mặc định).", "A UI block combining a TypeScript class, HTML template and styles (standalone by default)."],
+      ["Chia ứng dụng thành các khối độc lập, dễ tái sử dụng và kiểm thử.", "Split the app into independent, reusable and testable building blocks."],
+      ["@Component gắn class với template; Angular khởi tạo và render tại selector.", "@Component links a class to a template; Angular instantiates and renders it at the selector."],
+      ["Đặt <app-card/> vào template khác để tái sử dụng với dữ liệu riêng.", "Place <app-card/> in templates to reuse it with its own instance state."],
+      "@Component({\n  selector: 'app-card',\n  template: '<h3>{{ title }}</h3>'\n})\nexport class CardComponent {\n  @Input() title = '';\n}"
+    ],
+    [
+      ["Data binding", "Data binding"],
+      ["Đồng bộ dữ liệu giữa lớp component và template giao diện.", "Synchronizes data between the component class and template view."],
+      ["Cập nhật giao diện hoặc phản hồi sự kiện mà không tự thao tác DOM thủ công.", "Update views or handle events without manual DOM manipulation."],
+      ["{{ }} hiển thị chuỗi, [ ] gắn thuộc tính, ( ) bắt sự kiện, [( )] hai chiều.", "{{ }} interpolates text, [ ] binds properties, ( ) listens to events, [( )] binds two-way."],
+      ["Gõ vào ô nhập cập nhật giá trị và hiển thị ngay trên giao diện.", "Typing in an input updates the bound value and reflects immediately in the view."],
+      "<input [(ngModel)]='name'>\n<img [src]='avatar' [alt]='name'>\n<button (click)='save()'>Save</button>\n<p>Hi {{ name }}</p>"
+    ],
+    [
+      ["Directive", "Directive"],
+      ["Chỉ thị điều khiển cấu trúc DOM hoặc hành vi/style của phần tử.", "Instructions that alter DOM structure or element behavior and styling."],
+      ["Rẽ nhánh hiển thị, lặp danh sách và tái sử dụng hành vi DOM.", "Branch rendering, iterate collections and reuse DOM behaviors."],
+      ["Dùng @if/@for cho cấu trúc DOM và attribute directive cho class/style/hành vi.", "Use @if/@for for structural flow and attribute directives for classes, styles or behavior."],
+      ["Chỉ hiển thị danh sách khi đã đăng nhập và làm nổi bật mục đang giảm giá.", "Show items when logged in and highlight discounted entries."],
+      "@if (loggedIn) {\n  @for (p of products; track p.id) {\n    <li [class.sale]='p.onSale'>{{ p.name }}</li>\n  }\n}"
+    ],
+    [
+      ["Pipe", "Pipe"],
+      ["Hàm biến đổi giá trị ngay trên template bằng ký hiệu |.", "Template expression helper transforming values via the | operator."],
+      ["Định dạng ngày tháng, tiền tệ, chữ hoa/thường hoặc dữ liệu bất đồng bộ gọn gàng.", "Format dates, currency, casing or async streams cleanly in templates."],
+      ["Pipe nhận giá trị bên trái cùng tham số và trả về giá trị hiển thị mới.", "A pipe receives the left operand plus arguments and returns a formatted display value."],
+      ["Định dạng giá tiền, ngày và viết hoa tên người dùng trực tiếp trên template.", "Format currency, date and uppercase text directly in the template."],
+      "{{ price | currency:'USD' }}\n{{ today | date:'dd/MM/yyyy' }}\n{{ name | uppercase }}"
+    ]
+  ],
+  [
+    [
+      ["Service", "Service"],
+      ["Lớp chứa logic nghiệp vụ, gọi API hoặc trạng thái chia sẻ gắn @Injectable.", "A class holding shared business logic, API calls or state decorated with @Injectable."],
+      ["Tách logic khỏi component để dễ tái sử dụng và kiểm thử.", "Keep business and data logic out of components for reuse and testing."],
+      ["providedIn: 'root' đăng ký singleton ở injector gốc của ứng dụng.", "providedIn: 'root' registers a singleton in the root application injector."],
+      ["UserService cung cấp danh sách người dùng cho nhiều component.", "UserService supplies user data across multiple components."],
+      "@Injectable({ providedIn: 'root' })\nexport class UserService {\n  private http = inject(HttpClient);\n  list() { return this.http.get<User[]>('/api/users'); }\n}"
+    ],
+    [
+      ["Dependency Injection", "Dependency Injection"],
+      ["Cơ chế Angular tự khởi tạo và cung cấp phụ thuộc cho lớp/component.", "Angular's mechanism for instantiating and supplying dependencies to classes and components."],
+      ["Giảm phụ thuộc cứng và dễ hoán đổi bản giả (mock/fake) khi kiểm thử.", "Reduce tight coupling and swap real implementations for fakes during testing."],
+      ["Injector tra cứu provider theo token và cấp instance qua inject() hoặc constructor.", "The injector resolves providers by token and supplies instances via inject() or constructor."],
+      ["Thay thế UserService bằng FakeUserService trong cấu hình test.", "Substitute FakeUserService for UserService in test setup."],
+      "class UsersComponent {\n  private api = inject(UserService);\n}\n// In tests:\nTestBed.configureTestingModule({\n  providers: [{ provide: UserService, useClass: FakeUserService }]\n});"
+    ],
+    [
+      ["Routing", "Routing"],
+      ["Hệ thống điều hướng ánh xạ đường dẫn URL tới component và guard.", "Navigation system mapping URL paths to components, parameters and guards."],
+      ["Chuyển đổi giữa các trang/view trong ứng dụng mà không tải lại toàn trang.", "Navigate across views in an application without full page reloads."],
+      ["Router khớp URL với mảng Routes, chạy guard và render component trong <router-outlet>.", "The router matches URLs against Routes, runs guards and renders components in <router-outlet>."],
+      ["Mở /users/7 để hiển thị UserComponent sau khi guard kiểm tra quyền truy cập.", "Visit /users/7 to render UserComponent after access guard verification."],
+      "export const routes: Routes = [\n  { path: '', component: HomeComponent },\n  { path: 'users/:id', component: UserComponent, canActivate: [authGuard] }\n];"
+    ],
+    [
+      ["Reactive Forms", "Reactive Forms"],
+      ["Quản lý trạng thái và kiểm tra hợp lệ của form bằng FormGroup/FormControl trong code.", "Manage form state and validation programmatically via FormGroup and FormControl."],
+      ["Kiểm soát chặt chẽ dữ liệu nhập, validator và luồng thay đổi giá trị.", "Gain structured control over input values, validators and reactive value streams."],
+      ["Mỗi control theo dõi value, valid, dirty, touched và chạy validator khi giá trị đổi.", "Each control tracks value, valid, dirty and touched state and runs validators on changes."],
+      ["Vô hiệu hóa nút gửi khi trường email bắt buộc hoặc định dạng email chưa hợp lệ.", "Disable submit while email is required or malformed."],
+      "import { FormControl, FormGroup, Validators } from '@angular/forms';\n\nconst profileForm = new FormGroup({\n  email: new FormControl('', { nonNullable: true, validators: [Validators.required, Validators.email] })\n});"
+    ]
+  ],
+  [
+    [
+      ["Signals", "Signals"],
+      ["Hệ thống trạng thái phản ứng theo dõi chính xác nơi đọc giá trị.", "Reactive state primitives tracking exact read dependencies for fine-grained updates."],
+      ["Cập nhật giao diện hiệu quả và gọn gàng hơn cho trạng thái đồng bộ.", "Update UI cleanly and predictably for synchronous state."],
+      ["signal() lưu giá trị, computed() tính giá trị dẫn xuất, effect() chạy tác vụ phụ.", "signal() holds state, computed() derives values, effect() runs side effects."],
+      ["Tăng bộ đếm và tự động tính lại giá trị nhân đôi.", "Increment a counter and automatically recompute its doubled value."],
+      "const count = signal(0);\nconst double = computed(() => count() * 2);\nfunction inc() { count.update(n => n + 1); }"
+    ],
+    [
+      ["RxJS & Lazy loading", "RxJS & Lazy loading"],
+      ["Kết hợp luồng bất đồng bộ RxJS với tải lười route/component để giảm bundle ban đầu.", "Combine RxJS async streams with route/component lazy loading to shrink initial bundles."],
+      ["Xử lý sự kiện bất đồng bộ phức tạp và chỉ tải mã của route khi cần.", "Handle complex async streams and fetch route code only when navigated to."],
+      ["Operator pipe() điều phối request; loadComponent/loadChildren tách chunk khi build.", "Pipe operators coordinate async requests; loadComponent/loadChildren split route chunks."],
+      ["Tìm kiếm theo từ khóa có debounce/hủy request cũ và tải lười trang /admin.", "Debounce/cancel stale search requests and lazy-load the /admin route."],
+      "{ path: 'admin',\n  loadComponent: () => import('./admin/admin.page').then(m => m.AdminPage)\n}"
+    ]
+  ]
+]);
+
+// Populate React cards
+B("react", [
+  [
+    [
+      ["JSX, Component & Props", "JSX, Components & Props"],
+      ["Viết giao diện bằng JSX trong component hàm và truyền dữ liệu qua props.", "Author UI with JSX inside function components and pass data via props."],
+      ["Mô tả giao diện khai báo và tái sử dụng component với tham số đầu vào.", "Describe declarative UI and reuse components with typed/structured inputs."],
+      ["JSX biên dịch thành jsx() runtime; props chảy một chiều từ cha xuống con.", "JSX compiles to jsx() runtime calls; props flow one-way from parent to child."],
+      ["Hiển thị lời chào với prop name truyền từ component cha.", "Render a greeting using a name prop passed from a parent component."],
+      "function Hello({ name }: { name: string }) {\n  return <h3>Hello, {name}!</h3>;\n}"
+    ],
+    [
+      ["State với useState", "State with useState"],
+      ["Hook lưu trạng thái cục bộ của component và kích hoạt render lại khi đổi.", "Hook storing local component state and triggering re-renders on updates."],
+      ["Phản ánh thay đổi dữ liệu tương tác lên giao diện.", "Reflect interactive state changes in the rendered UI."],
+      ["useState trả về [value, setValue]; gọi setter lập lịch render lại.", "useState returns [value, setValue]; calling the setter schedules a re-render."],
+      ["Tăng giá trị bộ đếm khi người dùng bấm nút.", "Increment a counter when the user clicks the button."],
+      "function Counter() {\n  const [n, setN] = useState(0);\n  return <button onClick={() => setN(prev => prev + 1)}>{n}</button>;\n}"
+    ]
+  ],
+  [
+    [
+      ["useEffect & danh sách", "useEffect & Lists"],
+      ["Đồng bộ side effect sau commit DOM và render danh sách với key ổn định.", "Synchronize side effects after DOM commit and render lists with stable keys."],
+      ["Gọi API, đăng ký sự kiện và giúp React nhận diện từng phần tử danh sách.", "Fetch data, subscribe to events and help React track list item identity."],
+      ["useEffect chạy theo dependency array kèm cleanup; key giúp reconciliation chính xác.", "useEffect runs per dependency array with cleanup; keys guide list reconciliation."],
+      ["Tải danh sách mục khi mount và gắn key theo id duy nhất.", "Fetch items on mount and assign keys from unique item IDs."],
+      "useEffect(() => {\n  const controller = new AbortController();\n  fetch('/api/users', { signal: controller.signal })\n    .then(r => r.json())\n    .then(setUsers)\n    .catch(() => {});\n  return () => controller.abort();\n}, []);"
+    ],
+    [
+      ["Context & custom hook", "Context & Custom Hooks"],
+      ["Chia sẻ dữ liệu qua Context và đóng gói logic có state vào custom hook.", "Share subtree values via Context and encapsulate stateful logic in custom hooks."],
+      ["Tránh truyền props qua nhiều tầng trung gian và tái sử dụng logic sạch sẽ.", "Avoid prop drilling across intermediate layers and reuse stateful logic cleanly."],
+      ["Provider cung cấp giá trị qua useContext; custom hook bắt đầu bằng use và gọi các hook khác.", "Providers supply values via useContext; custom hooks start with use and compose hooks."],
+      ["Đọc theme hiện tại qua hook useTheme() ở component con sâu.", "Read the current theme via useTheme() inside a nested child component."],
+      "const ThemeCtx = createContext<'light' | 'dark'>('light');\nfunction useTheme() {\n  return useContext(ThemeCtx);\n}"
+    ]
+  ],
+  [
+    [
+      ["Tối ưu: memo, useMemo, useCallback", "Optimization: memo, useMemo, useCallback"],
+      ["Ghi nhớ component, giá trị tính toán hoặc hàm để giảm render/tính toán thừa.", "Memoize components, computed values or callbacks to avoid redundant work."],
+      ["Giữ giao diện mượt trên danh sách lớn hoặc phép tính nặng sau khi đã đo đạc.", "Keep UI responsive on large lists or expensive computations after profiling."],
+      ["memo so sánh props; useMemo ghi nhớ kết quả; useCallback giữ tham chiếu hàm.", "memo compares props; useMemo caches results; useCallback preserves function identity."],
+      ["Ghi nhớ kết quả tính tổng và hàm xử lý chọn mục.", "Memoize a derived total and a selection callback."],
+      "const Row = memo(function Row({ label }: { label: string }) {\n  return <li>{label}</li>;\n});\nconst total = useMemo(() => items.reduce((a, b) => a + b, 0), [items]);"
+    ],
+    [
+      ["Suspense & Concurrent", "Suspense & Concurrent Rendering"],
+      ["Hiển thị fallback khi chờ và giữ thao tác nhập mượt khi cập nhật nặng.", "Display loading fallbacks while waiting and keep typing smooth during heavy updates."],
+      ["Nâng cao trải nghiệm phản hồi khi tải bất đồng bộ hoặc lọc dữ liệu lớn.", "Improve perceived responsiveness during async loading or heavy filtering."],
+      ["Suspense bắt trạng thái chờ; useTransition / useDeferredValue ưu tiên tương tác khẩn cấp.", "Suspense handles pending boundaries; useTransition / useDeferredValue prioritize urgent input."],
+      ["Hoãn cập nhật danh sách lọc để ô tìm kiếm phản hồi ngay lập tức.", "Defer heavy filter updates so the search input stays responsive."],
+      "const [isPending, startTransition] = useTransition();\nfunction handleSearch(value: string) {\n  setQuery(value);\n  startTransition(() => setFilteredQuery(value));\n}"
+    ]
+  ]
+]);
+
+// Populate Next.js cards
+B("next", [
+  [
+    [
+      ["File-based routing (App Router)", "File-based Routing (App Router)"],
+      ["Định tuyến dựa trên thư mục trong app/ với page.tsx và layout.tsx.", "Folder-based routing inside app/ using page.tsx and layout.tsx conventions."],
+      ["Tổ chức trang, layout lồng nhau và tham số động rõ ràng theo cấu trúc thư mục.", "Structure pages, nested layouts and dynamic segments directly from folders."],
+      ["Thư mục định nghĩa segment URL; layout.tsx bọc trang con và giữ trạng thái khi chuyển trang.", "Folders define URL segments; layout.tsx wraps child routes and persists across navigation."],
+      ["Tổ chức trang chủ, danh sách blog và bài viết động theo [slug].", "Organize home, blog index and dynamic [slug] post routes."],
+      "app/\n  layout.tsx        // root layout\n  page.tsx          // /\n  blog/\n    page.tsx        // /blog\n    [slug]/page.tsx // /blog/hello"
+    ],
+    [
+      ["Link & Image", "Link & Image"],
+      ["Điều hướng client qua <Link> và tối ưu hình ảnh qua <Image>.", "Client-side navigation via <Link> and automatic image optimization via <Image>."],
+      ["Chuyển trang nhanh, giảm dung lượng ảnh và hạn chế nhảy bố cục (CLS).", "Enable fast transitions, smaller image payloads and stable layout dimensions."],
+      ["<Link> prefetch route; <Image> điều chỉnh kích thước/định dạng và giữ chỗ khung hình.", "<Link> prefetches routes; <Image> adapts size/format and reserves aspect space."],
+      ["Điều hướng sang /blog và hiển thị ảnh với kích thước khai báo rõ ràng.", "Navigate to /blog and render an image with explicit dimensions."],
+      "import Link from 'next/link';\nimport Image from 'next/image';\n\n<Link href=\"/blog\">Blog</Link>\n<Image src=\"/hero.png\" width={400} height={300} alt=\"Hero\" />"
+    ]
+  ],
+  [
+    [
+      ["Server Components & lấy dữ liệu", "Server Components & Data Fetching"],
+      ["Component chạy trên server mặc định, lấy dữ liệu trực tiếp và không gửi JS thừa xuống client.", "Components run on the server by default, fetch data directly and ship zero extra client JS."],
+      ["Giữ secret an toàn ở server, giảm bundle JS và có dữ liệu ngay khi render.", "Keep secrets on the server, shrink client JS and render with server data ready."],
+      ["Server Component thực thi async/await trên server và trả HTML cùng RSC payload.", "Server Components run async/await on the server and return HTML plus RSC payload."],
+      ["Tải danh sách bài viết trực tiếp trên server cho trang /posts.", "Load posts directly on the server for the /posts page."],
+      "export default async function PostsPage() {\n  const posts = await getPosts();\n  return <ul>{posts.map(p => <li key={p.id}>{p.title}</li>)}</ul>;\n}"
+    ],
+    [
+      ["Client Components", "Client Components"],
+      ["Đánh dấu 'use client' khi cần state, event handler hoặc API trình duyệt.", "Mark files with 'use client' when using state, event handlers or browser APIs."],
+      ["Bổ sung tương tác phía trình duyệt chỉ tại các nhánh giao diện cần thiết.", "Add browser interactivity specifically on UI branches that require it."],
+      ["Next.js đóng gói bundle cho ranh giới client và hydrate trên trình duyệt.", "Next.js bundles client boundaries and hydrates them in the browser."],
+      ["Tạo nút Like tương tác bằng state phía client.", "Build an interactive Like button using client state."],
+      "'use client';\nimport { useState } from 'react';\n\nexport default function LikeButton() {\n  const [count, setCount] = useState(0);\n  return <button onClick={() => setCount(c => c + 1)}>Likes: {count}</button>;\n}"
+    ]
+  ],
+  [
+    [
+      ["Server Actions & Route Handlers", "Server Actions & Route Handlers"],
+      ["Thực thi mutation trên server bằng 'use server' hoặc tạo HTTP endpoint bằng route.ts.", "Run server mutations with 'use server' or expose HTTP endpoints via route.ts."],
+      ["Xử lý form/ghi dữ liệu gọn gàng và phục vụ webhook/API cho hệ thống ngoài.", "Handle mutations cleanly and serve webhooks or external HTTP consumers."],
+      ["Server Action nhận FormData/tham số và chạy trên server; Route Handler xuất GET/POST/...", "Server Actions run 'use server' functions; Route Handlers export GET/POST/... handlers."],
+      ["Tạo bài viết qua form action và kiểm tra dữ liệu an toàn trên server.", "Create a post via a form action and process it safely on the server."],
+      "async function createPost(formData: FormData) {\n  'use server';\n  const title = String(formData.get('title') ?? '').trim();\n  if (!title) return;\n  await savePost({ title });\n}"
+    ],
+    [
+      ["Revalidation & Streaming", "Revalidation & Streaming"],
+      ["Làm mới dữ liệu/route theo chiến lược và stream từng phần giao diện qua <Suspense>.", "Revalidate cached routes/data on demand or schedule and stream sections via <Suspense>."],
+      ["Cân bằng tốc độ phản hồi, độ tươi mới của dữ liệu và trải nghiệm chờ mượt mà.", "Balance fast responses, data freshness and progressive loading UX."],
+      ["revalidatePath/revalidateTag làm mới cache; <Suspense> stream vùng chậm sau phần chính.", "revalidatePath/revalidateTag refreshes cache; <Suspense> streams slow chunks progressively."],
+      ["Làm mới path /posts sau khi cập nhật và bọc vùng bình luận bằng <Suspense>.", "Revalidate /posts after updates and wrap slow comments in <Suspense>."],
+      "import { revalidatePath } from 'next/cache';\n\nexport async function publishPost() {\n  'use server';\n  revalidatePath('/posts');\n}"
+    ]
+  ]
+]);
+
+// Additional Angular cards
+A("angular", 0, [
+  ["Lifecycle hooks", "Lifecycle hooks"],
+  ["Các phương thức Angular gọi tại các mốc vòng đời của component.", "Methods Angular invokes at defined stages of a component's lifecycle."],
+  ["Khởi tạo dữ liệu, phản ứng khi input thay đổi và dọn dẹp tài nguyên khi hủy.", "Initialize state, react to input changes and clean up resources on destroy."],
+  ["Angular gọi các hook theo thứ tự vòng đời tương ứng với khởi tạo, cập nhật và hủy.", "Angular invokes lifecycle hooks across initialization, input updates and teardown."],
+  ["Đăng ký tài nguyên khi khởi tạo và dọn dẹp khi component bị hủy.", "Set up resources on init and clean them up when destroyed."],
+  "export class TimerComponent implements OnDestroy {\n  private timerId = setInterval(() => {}, 1000);\n  ngOnDestroy() {\n    clearInterval(this.timerId);\n  }\n}",
+  [
+    ["ngOnChanges", "Chạy khi @Input thay đổi, nhận SimpleChanges.", "Runs when @Input bindings change, receiving SimpleChanges.", "ngOnChanges(changes: SimpleChanges) {}"],
+    ["ngOnInit", "Chạy sau lần khởi tạo input đầu tiên.", "Runs once after initial inputs are set.", "ngOnInit() {}"],
+    ["ngOnDestroy", "Chạy ngay trước khi component bị hủy để dọn dẹp.", "Runs right before destruction to clean up subscriptions/timers.", "ngOnDestroy() {}"]
+  ]
+]);
+
+A("angular", 0, [
+  ["Giao tiếp giữa component", "Component communication"],
+  ["Cách truyền dữ liệu và thông báo sự kiện giữa các component.", "How components pass inputs down and emit events upward."],
+  ["Giữ component tách biệt rõ ràng nhưng phối hợp nhịp nhàng.", "Keep components modular while coordinating data and actions cleanly."],
+  ["Cha truyền xuống qua @Input / input(); con phát sự kiện lên qua @Output / output().", "Parent passes down via @Input / input(); child emits upward via @Output / output()."],
+  ["Component con phát sự kiện chọn mục khi người dùng bấm.", "A child component emits a selection event when clicked."],
+  "@Component({ selector: 'app-item', template: `<button (click)=\"select.emit(id)\">Pick</button>` })\nexport class ItemComponent {\n  @Input() id = '';\n  @Output() select = new EventEmitter<string>();\n}",
+  [
+    ["@Input / input()", "Nhận dữ liệu từ component cha.", "Receives data from a parent component.", "@Input() title = '';"],
+    ["@Output / output()", "Phát sự kiện từ component con lên cha.", "Emits events from a child component to its parent.", "@Output() picked = new EventEmitter<string>();"],
+    ["Service chung", "Chia sẻ trạng thái giữa các component không trực tiếp cha-con.", "Share state across non-parent/child components via a service.", "private cart = inject(CartService);"]
+  ]
+]);
+
+A("angular", 1, [
+  ["HttpClient & Interceptor", "HttpClient & Interceptors"],
+  ["Gọi HTTP API trả về Observable và can thiệp request/response qua interceptor.", "Perform HTTP calls returning Observables and intercept requests/responses centrally."],
+  ["Gắn header xác thực, ghi log hoặc xử lý lỗi HTTP thống nhất.", "Attach auth headers, log traffic or handle HTTP errors in one place."],
+  ["Request đi qua chuỗi interceptor trước khi gửi và response đi ngược lại qua chuỗi đó.", "Requests pass through configured interceptors before dispatch and responses flow back."],
+  ["Thêm header Authorization vào mọi request gửi đi.", "Attach an Authorization header to outgoing HTTP requests."],
+  "export const authInterceptor: HttpInterceptorFn = (req, next) => {\n  const cloned = req.clone({ setHeaders: { 'X-Client': 'web' } });\n  return next(cloned);\n};",
+  [
+    ["GET / POST / PUT / DELETE", "Thực hiện các phương thức HTTP chuẩn qua HttpClient.", "Issue standard HTTP methods via HttpClient.", "http.get<Item[]>('/api/items')"],
+    ["Functional Interceptor", "Hàm HttpInterceptorFn đăng ký qua withInterceptors([...]).", "Functional interceptor registered with withInterceptors([...]).", "provideHttpClient(withInterceptors([authInterceptor]))"]
+  ]
+]);
+
+A("angular", 2, [
+  ["Change detection", "Change detection"],
+  ["Cơ chế kiểm tra thay đổi trạng thái để đồng bộ DOM.", "Mechanism checking state changes to keep DOM bindings in sync."],
+  ["Tối ưu số lần kiểm tra giao diện trên ứng dụng lớn.", "Reduce unnecessary view checks in larger applications."],
+  ["Hỗ trợ Default, OnPush và Zoneless/Signals để kiểm soát phạm vi cập nhật.", "Supports Default, OnPush and Zoneless/Signals strategies to scope updates."],
+  ["Đặt OnPush cho component hiển thị theo input/signal.", "Use OnPush on components driven by inputs or signals."],
+  "@Component({\n  selector: 'app-summary',\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  template: '<p>{{ total }}</p>'\n})\nexport class SummaryComponent {\n  @Input() total = 0;\n}",
+  [
+    ["Default", "Kiểm tra cây component theo chuẩn mặc định.", "Default change detection check across bindings.", "// ChangeDetectionStrategy.Default"],
+    ["OnPush", "Chỉ kiểm tra khi input đổi tham chiếu, có sự kiện nội bộ hoặc signal đổi.", "Checks when input references change, local events fire or signals update.", "changeDetection: ChangeDetectionStrategy.OnPush"],
+    ["Zoneless", "Chạy không phụ thuộc Zone.js, dựa vào Signals và sự kiện.", "Runs without Zone.js, driven by Signals and events.", "provideZonelessChangeDetection()"]
+  ]
+]);
+
+A("angular", 2, [
+  ["NgRx & SignalStore", "NgRx & SignalStore"],
+  ["Quản lý trạng thái toàn cục có cấu trúc với action, reducer/store và selector.", "Structured global state management with actions, reducers/stores and selectors."],
+  ["Dễ truy vết thay đổi trạng thái và gỡ lỗi ở ứng dụng quy mô lớn.", "Trace state transitions predictably and debug large applications."],
+  ["Dispatch action → cập nhật state bất biến → đọc qua selector/signal.", "Dispatch actions → update immutable state → read via selectors or signals."],
+  ["Cập nhật danh sách mục bằng action và bộ chọn dữ liệu.", "Update a collection via actions and derive state with selectors."],
+  "export const addItem = createAction('[Cart] Add', props<{ name: string }>());\nexport const cartReducer = createReducer(\n  [] as string[],\n  on(addItem, (state, { name }) => [...state, name])\n);",
+  [
+    ["Action & Reducer", "Mô tả sự kiện và tính trạng thái mới bất biến.", "Describe events and compute next immutable state.", "createReducer(initialState, on(...))"],
+    ["Selector / SignalStore", "Trích xuất dữ liệu dẫn xuất hoặc quản lý store gọn theo Signals.", "Derive state slices or manage compact reactive stores with Signals.", "createSelector(selectCart, list => list.length)"]
+  ]
+]);
+
+A("angular", 2, [
+  ["SSR & Hydration", "SSR & Hydration"],
+  ["Render Angular trên server thành HTML rồi gắn tương tác trên trình duyệt.", "Render Angular to HTML on the server and hydrate interactivity in the browser."],
+  ["Cải thiện tốc độ hiển thị nội dung ban đầu và hỗ trợ SEO.", "Improve initial content paint and search engine indexability."],
+  ["Server tạo HTML ban đầu; client tải JS và gắn listener vào DOM hiện có.", "Server produces initial HTML; client loads JS and hydrates existing DOM nodes."],
+  ["Bật client hydration cho ứng dụng Angular SSR.", "Enable client hydration for an Angular SSR application."],
+  "bootstrapApplication(AppComponent, {\n  providers: [provideClientHydration()]\n});",
+  [
+    ["SSR", "Render HTML trên server cho yêu cầu.", "Server-side HTML rendering.", "provideClientHydration()"],
+    ["Prerender (SSG)", "Dựng sẵn trang tĩnh lúc build khi dữ liệu ít thay đổi.", "Build-time static prerendering for stable routes.", "RenderMode.Prerender"]
+  ]
+]);
+
+A("angular", 2, [
+  ["Kiểm thử (Testing)", "Testing"],
+  ["Kiểm thử tự động logic, component và luồng người dùng.", "Automated testing for logic, components and browser flows."],
+  ["Ngăn lỗi hồi quy khi thêm tính năng hoặc tái cấu trúc mã.", "Prevent regressions during feature work and refactoring."],
+  ["Kiểm thử riêng lẻ service/pipe/component hoặc chạy trình duyệt thật cho E2E.", "Test services/pipes/components in isolation or run real browsers for E2E."],
+  ["Kiểm tra kết quả render của component trong môi trường test.", "Verify rendered component output in a test suite."],
+  "it('renders title', () => {\n  const fixture = TestBed.createComponent(CardComponent);\n  fixture.componentInstance.title = 'Hello';\n  fixture.detectChanges();\n  expect(fixture.nativeElement.textContent).toContain('Hello');\n});",
+  [
+    ["Unit / Component", "Kiểm thử hàm, service và component qua TestBed.", "Test functions, services and components via TestBed.", "TestBed.createComponent(CardComponent)"],
+    ["E2E", "Kiểm thử luồng thực tế trên trình duyệt thật (Playwright / Cypress).", "End-to-end browser verification (Playwright / Cypress).", "await page.goto('/')"]
+  ]
+]);
+
+A("angular", 2, [
+  ["Signals nâng cao & Hydration", "Advanced Signals & Hydration"],
+  ["Mở rộng Signals (linkedSignal, resource, signal inputs) và hydration tối ưu cho SSR.", "Extend Signals (linkedSignal, resource, signal inputs) alongside SSR hydration."],
+  ["Đồng bộ trạng thái dẫn xuất có thể ghi đè, dữ liệu bất đồng bộ và tải tương tác mượt mà.", "Handle writable derived state, reactive async resources and smooth hydration."],
+  ["linkedSignal cập nhật khi nguồn đổi nhưng vẫn cho ghi đè; incremental hydration kích hoạt phần trễ khi cần.", "linkedSignal resets on source changes while allowing overrides; incremental hydration activates deferred blocks on demand."],
+  ["Tạo linkedSignal phụ thuộc vào filterId và dùng NgOptimizedImage cho ảnh.", "Create a linkedSignal from filterId and use NgOptimizedImage for images."],
+  "const selectedFilter = signal('all');\nconst draftSort = linkedSignal(() => selectedFilter());\n// Template: <img ngSrc=\"/hero.png\" width=\"600\" height=\"400\" priority />",
+  [
+    ["linkedSignal / resource", "Quản lý trạng thái dẫn xuất ghi đè được và dữ liệu bất đồng bộ theo Signal.", "Writable derived state and Signal-driven async data loading.", "linkedSignal(() => src())"],
+    ["CDK & NgOptimizedImage", "Bộ công cụ hạ tầng UI (a11y, overlay, virtual scroll) và tối ưu ảnh chuẩn Angular.", "UI infrastructure primitives (a11y, overlay, virtual scroll) and image optimization.", "ngSrc=\"...\" priority"]
+  ]
+]);
+
+A("react", 1, [
+  ["useRef", "useRef"],
+  ["Hook giữ tham chiếu có thể thay đổi (.current) mà không gây render lại.", "Hook holding a mutable .current value that does not trigger re-renders."],
+  ["Truy cập phần tử DOM hoặc lưu giá trị không cần vẽ lại giao diện.", "Access DOM nodes or keep mutable values without re-rendering UI."],
+  ["Object ref giữ nguyên giữa các lần render; sửa ref.current không kích hoạt render.", "The ref object persists across renders; mutating ref.current does not re-render."],
+  ["Focus vào ô tìm kiếm khi mở giao diện.", "Focus an input element when mounting."],
+  "function SearchBox() {\n  const inputRef = useRef<HTMLInputElement | null>(null);\n  useEffect(() => {\n    inputRef.current?.focus();\n  }, []);\n  return <input ref={inputRef} />;\n}",
+  [
+    ["DOM ref", "Tham chiếu tới phần tử DOM (focus, đo kích thước, scroll).", "Reference to a DOM node (focus, measurement, scroll).", "ref={inputRef}"],
+    ["Mutable value", "Lưu ID timer hoặc giá trị nội bộ không cần render lại.", "Store timer IDs or internal values without re-renders.", "timerRef.current = id"]
+  ]
+]);
+
+A("react", 1, [
+  ["useReducer", "useReducer"],
+  ["Hook quản lý trạng thái phức tạp qua hàm reducer thuần dựa trên action.", "Hook managing complex state transitions via a pure reducer and actions."],
+  ["Tập trung logic chuyển đổi trạng thái vào một hàm dễ kiểm thử.", "Centralize state transition rules in a testable pure function."],
+  ["Gọi dispatch(action) → reducer(state, action) trả về trạng thái mới.", "Calling dispatch(action) invokes reducer(state, action) to produce next state."],
+  ["Quản lý trạng thái bật/tắt và tăng giảm bằng action.", "Manage toggle and counter transitions through actions."],
+  "type Action = { type: 'inc' } | { type: 'reset' };\nfunction reducer(s: number, a: Action): number {\n  if (a.type === 'inc') return s + 1;\n  return 0;\n}",
+  [
+    ["useState", "Phù hợp trạng thái độc lập, đơn giản.", "Best for simple, standalone state values.", "const [n, setN] = useState(0);"],
+    ["useReducer", "Phù hợp nhiều trạng thái liên quan hoặc nhiều loại action.", "Best for related fields or multiple action types.", "const [s, dispatch] = useReducer(reducer, 0);"]
+  ]
+]);
+
+A("react", 2, [
+  ["Error Boundary", "Error Boundary"],
+  ["Component bắt lỗi xảy ra khi render cây con và hiển thị giao diện dự phòng.", "Component catching render/lifecycle errors in child subtrees and showing fallback UI."],
+  ["Ngăn một lỗi nhỏ làm sập toàn bộ ứng dụng trên trình duyệt.", "Prevent a localized rendering error from crashing the entire app."],
+  ["Cài đặt getDerivedStateFromError để chuyển sang trạng thái fallback khi có lỗi con.", "Implement getDerivedStateFromError to render fallback UI when descendants throw."],
+  ["Bọc widget bằng ErrorBoundary để hiển thị thông báo lỗi thân thiện.", "Wrap a widget in an ErrorBoundary to display a graceful fallback."],
+  "import { Component, type ReactNode } from 'react';\n\nclass ErrorBoundary extends Component<{ children: ReactNode }, { hasError: boolean }> {\n  state = { hasError: false };\n  static getDerivedStateFromError() { return { hasError: true }; }\n  render() { return this.state.hasError ? <p>Error</p> : this.props.children; }\n}",
+  [
+    ["Render / Lifecycle", "Bắt lỗi khi render hoặc lifecycle của cây con.", "Catches errors thrown during child render/lifecycle.", "getDerivedStateFromError()"],
+    ["Event / Async", "Lỗi trong event handler hoặc Promise cần xử lý riêng.", "Event handlers and async rejections need explicit try/catch.", "try { await save(); } catch (e) {}"]
+  ]
+]);
+
+A("react", 1, [
+  ["React Router", "React Router"],
+  ["Thư viện định tuyến cho ứng dụng React giúp ánh xạ URL tới component.", "Routing library for React mapping URLs to views, params and nested layouts."],
+  ["Điều hướng nhiều trang mượt mà trong ứng dụng SPA.", "Support multi-view navigation smoothly inside React SPAs."],
+  ["Khai báo danh sách route, hiển thị route con qua <Outlet/> và đọc tham số bằng hook.", "Configure route definitions, render child routes via <Outlet/> and read params via hooks."],
+  ["Tạo router với trang chủ và route động theo id.", "Create a router with a home route and a dynamic id route."],
+  "import { createBrowserRouter } from 'react-router-dom';\n\nconst router = createBrowserRouter([\n  { path: '/', element: <div>Home</div> },\n  { path: '/users/:id', element: <div>User</div> }\n]);",
+  [
+    ["Dynamic params", "Đọc tham số đường dẫn động như /users/:id.", "Read dynamic path segments like /users/:id.", "useParams()"],
+    ["Nested layout", "Lồng giao diện cha-con qua <Outlet/>.", "Nest parent and child layouts with <Outlet/>.", "<Outlet />"]
+  ]
+]);
+
+A("react", 2, [
+  ["Thư viện state: Zustand & Redux", "State Libraries: Zustand & Redux"],
+  ["Kho lưu trữ trạng thái toàn cục dùng chung cho nhiều component/tính năng.", "Global state stores shared across components and features."],
+  ["Quản lý trạng thái dùng chung lớn mà không cần truyền props qua nhiều tầng.", "Manage shared application state without deep prop drilling."],
+  ["Component đăng ký selector/slice để chỉ render lại khi phần dữ liệu liên quan đổi.", "Components subscribe to slices/selectors so only relevant consumers re-render."],
+  ["Tạo store gọn nhẹ với Zustand cho bộ đếm dùng chung.", "Create a concise Zustand store for shared state."],
+  "import { create } from 'zustand';\n\nconst useCounterStore = create<{ count: number; inc: () => void }>(set => ({\n  count: 0,\n  inc: () => set(s => ({ count: s.count + 1 }))\n}));",
+  [
+    ["Zustand", "Gọn nhẹ, ít boilerplate, dùng trực tiếp qua hook.", "Minimal boilerplate, hook-based global store.", "create(...)"],
+    ["Redux Toolkit / TanStack Query", "Chuẩn hóa cho state lớn hoặc quản lý cache dữ liệu server.", "Structured global state or dedicated server-state caching.", "useQuery(...)"]
+  ]
+]);
+
+A("react", 2, [
+  ["Kiểm thử (Testing)", "Testing"],
+  ["Kiểm thử giao diện và hành vi người dùng với React Testing Library / Vitest / Playwright.", "Test UI behavior and user flows with React Testing Library, Vitest/Jest and Playwright."],
+  ["Đảm bảo component hoạt động đúng theo trải nghiệm thực tế của người dùng.", "Verify component behavior from a user interaction perspective."],
+  ["Render component, mô phỏng thao tác người dùng và kiểm tra kết quả hiển thị.", "Render components, simulate user events and assert on visible output."],
+  ["Kiểm tra nút bấm cập nhật giá trị hiển thị trên màn hình.", "Assert that clicking a button updates the rendered text."],
+  "import { render, screen, fireEvent } from '@testing-library/react';\n\ntest('increments on click', () => {\n  render(<Counter />);\n  fireEvent.click(screen.getByRole('button'));\n  expect(screen.getByText('1')).toBeTruthy();\n});",
+  [
+    ["Component test", "Kiểm thử giao diện và tương tác qua Testing Library.", "Test rendered output and interactions via Testing Library.", "screen.getByRole('button')"],
+    ["E2E test", "Kiểm thử toàn luồng trên trình duyệt thật.", "Test full end-to-end journeys in a real browser.", "await page.click('button')"]
+  ]
+]);
+
+A("react", 2, [
+  ["useOptimistic, use() & a11y", "useOptimistic, use() & Accessibility"],
+  ["Cập nhật lạc quan khi gửi tác vụ, đọc promise/context với use() và đảm bảo khả năng tiếp cận (a11y).", "Optimistic UI updates during mutations, reading promises/context via use() and accessibility (a11y)."],
+  ["Phản hồi giao diện tức thì khi người dùng thao tác và giữ ứng dụng dùng được bằng bàn phím/screen reader.", "Give immediate visual feedback on actions while keeping UI usable via keyboard and screen readers."],
+  ["useOptimistic hiển thị trạng thái tạm trước khi server xác nhận; semantic HTML + ARIA hỗ trợ assistive tech.", "useOptimistic shows pending optimistic state before server confirmation; semantic HTML + ARIA aid assistive tech."],
+  ["Cập nhật số lượt thích lạc quan và dùng nút/nhãn ngữ nghĩa rõ ràng.", "Optimistically increment likes and use semantic button/label attributes."],
+  "function LikeCounter({ initialLikes }: { initialLikes: number }) {\n  const [optimisticLikes, addOptimisticLike] = useOptimistic(\n    initialLikes,\n    (curr, delta: number) => curr + delta\n  );\n  return <button type=\"button\" onClick={() => addOptimisticLike(1)}>♥ {optimisticLikes}</button>;\n}",
+  [
+    ["useOptimistic", "Hiển thị trạng thái tạm thời khi mutation đang chạy và đồng bộ lại khi hoàn tất.", "Show temporary optimistic state during mutations and reconcile on completion.", "useOptimistic(val, reducer)"],
+    ["Semantic HTML & ARIA", "Ưu tiên thẻ ngữ nghĩa (<button>, <main>, <nav>, <label>) và focus rõ ràng.", "Prefer semantic elements (<button>, <main>, <nav>, <label>) and clear focus.", "<button type=\"button\">"]
+  ]
+]);
+
+A("next", 0, [
+  ["Metadata & SEO", "Metadata & SEO"],
+  ["Khai báo metadata tĩnh hoặc động cho từng trang nhằm tối ưu hiển thị tìm kiếm và chia sẻ.", "Declare static or dynamic page metadata for search engines and social previews."],
+  ["Kiểm soát title, description, Open Graph và canonical theo từng route.", "Customize title, description, Open Graph and canonical tags per route."],
+  ["Next.js tổng hợp metadata từ layout tới page và xuất vào thẻ <head>.", "Next.js merges metadata from layouts down to pages into <head>."],
+  ["Xuất metadata tĩnh cho trang giới thiệu.", "Export static metadata for a page."],
+  "import type { Metadata } from 'next';\n\nexport const metadata: Metadata = {\n  title: 'About Us',\n  description: 'Learn more about our platform.'\n};",
+  [
+    ["Static metadata", "Export object metadata cho trang có thông tin cố định.", "Export a metadata object for static pages.", "export const metadata: Metadata = { ... }"],
+    ["generateMetadata", "Tính metadata động theo params hoặc dữ liệu của từng bản ghi.", "Compute dynamic metadata per route params or record.", "export async function generateMetadata() { ... }"]
+  ]
+]);
+
+A("next", 1, [
+  ["Chiến lược render", "Rendering Strategies"],
+  ["Lựa chọn cách tạo HTML cho từng route: tĩnh/ISR, động theo request hoặc client.", "Choose how each route renders HTML: static/ISR, dynamic per request or client-side."],
+  ["Tối ưu tốc độ phản hồi, chi phí server và độ mới của dữ liệu.", "Balance response latency, server cost and data freshness."],
+  ["Dùng dynamic khi đọc dữ liệu theo request/phiên; dùng tĩnh/ISR cho nội dung có thể cache.", "Use dynamic rendering for per-request/session data and static/ISR for cacheable content."],
+  ["Đánh dấu route render động khi cần dữ liệu theo từng request.", "Opt a route into dynamic rendering when required."],
+  "export const dynamic = 'force-dynamic';\n\nexport default async function DashboardPage() {\n  return <div>Live dashboard</div>;\n}",
+  [
+    ["Static / ISR", "Dựng sẵn lúc build hoặc tái tạo định kỳ/theo tag.", "Pre-rendered at build time or revalidated periodically/on-demand.", "revalidatePath('/posts')"],
+    ["Dynamic", "Render mỗi khi có request khi phụ thuộc dữ liệu theo yêu cầu.", "Rendered per request when dependent on request-time data.", "export const dynamic = 'force-dynamic';"]
+  ]
+]);
+
+A("next", 1, [
+  ["Middleware", "Middleware"],
+  ["Hàm chạy ở tầng request trước khi tới route để kiểm tra, chuyển hướng hoặc sửa header.", "Request-boundary handler running before routes to inspect, redirect or rewrite headers."],
+  ["Xử lý chuyển hướng, header hoặc điều hướng sớm trên các đường dẫn khớp matcher.", "Handle redirects, headers or early routing on paths matching config.matcher."],
+  ["Nhận NextRequest và trả về NextResponse.next(), redirect() hoặc rewrite().", "Inspect NextRequest and return NextResponse.next(), redirect() or rewrite()."],
+  ["Chuyển hướng khi thiếu cookie phiên trên đường dẫn /dashboard.", "Redirect when a session cookie is missing on /dashboard routes."],
+  "import { NextResponse, type NextRequest } from 'next/server';\n\nexport function middleware(req: NextRequest) {\n  if (!req.cookies.get('session')) {\n    return NextResponse.redirect(new URL('/login', req.url));\n  }\n  return NextResponse.next();\n}",
+  [
+    ["redirect / rewrite", "Chuyển hướng URL hiển thị hoặc rewrite nội dung giữ nguyên URL.", "Redirect the browser URL or rewrite internally while keeping the URL.", "NextResponse.redirect(url)"],
+    ["matcher", "Giới hạn phạm vi đường dẫn áp dụng middleware.", "Scope middleware execution to matching URL patterns.", "export const config = { matcher: ['/dashboard/:path*'] };"]
+  ]
+]);
+
+A("next", 2, [
+  ["Parallel & Intercepting routes", "Parallel & Intercepting Routes"],
+  ["Parallel hiển thị nhiều slot đồng thời; Intercepting chặn điều hướng trong ngữ cảnh hiện tại.", "Parallel routes render multiple slots together; intercepting routes capture navigation in context."],
+  ["Dựng giao diện đa vùng hoặc mở modal có URL riêng mà vẫn giữ ngữ cảnh trang nền.", "Build multi-pane views or URL-backed modals while preserving background context."],
+  ["Thư mục @slot truyền vào layout như prop; (.) chặn điều hướng mềm theo quy ước tương đối.", "@slot folders pass into layouts as props; (.) conventions intercept soft navigation."],
+  ["Nhận slot @modal trong layout để hiển thị nội dung bổ sung.", "Accept a @modal slot prop inside a layout."],
+  "export default function GalleryLayout({\n  children,\n  modal\n}: {\n  children: React.ReactNode;\n  modal: React.ReactNode;\n}) {\n  return (\n    <>\n      {children}\n      {modal}\n    </>\n  );\n}",
+  [
+    ["Parallel (@slot)", "Hiển thị nhiều nhánh độc lập trong cùng một layout.", "Render independent route slots inside one layout.", "@modal/page.tsx"],
+    ["Intercepting (.)", "Chặn điều hướng mềm để hiển thị route theo ngữ cảnh khác.", "Intercept soft navigations to show routes in another context.", "@modal/(.)photo/[id]/page.tsx"]
+  ]
+]);
+
+A("next", 2, [
+  ["error.tsx & not-found", "error.tsx & not-found"],
+  ["Tệp đặc biệt của App Router xử lý lỗi runtime theo segment và trang 404.", "App Router special files handling segment error boundaries and 404 not-found states."],
+  ["Giữ phần còn lại của ứng dụng hoạt động và cho phép người dùng thử lại khi gặp lỗi.", "Keep surrounding UI intact and let users retry when a segment errors."],
+  ["error.tsx là Client Component nhận error và reset; notFound() kích hoạt giao diện 404.", "error.tsx is a Client Component receiving error and reset; notFound() renders 404 UI."],
+  ["Cung cấp nút thử lại (reset) khi xảy ra lỗi trong route segment.", "Provide a retry button using reset() inside error.tsx."],
+  "'use client';\n\nexport default function SegmentError({ reset }: { error: Error; reset: () => void }) {\n  return <button onClick={() => reset()}>Try again</button>;\n}",
+  [
+    ["error.tsx", "Bắt lỗi trong route segment và cung cấp hàm reset().", "Catches segment errors and exposes reset().", "reset()"],
+    ["not-found.tsx", "Hiển thị giao diện khi gọi notFound() hoặc không khớp route.", "Renders when notFound() is called or no route matches.", "notFound()"]
+  ]
+]);
+
+A("next", 2, [
+  ["Xác thực (Authentication)", "Authentication"],
+  ["Xác minh danh tính người dùng và kiểm soát quyền truy cập vào route/dữ liệu.", "Verify user identity and guard access to protected routes and server data."],
+  ["Bảo vệ trang riêng tư, thao tác ghi dữ liệu và thông tin nhạy cảm.", "Protect private pages, mutations and sensitive data."],
+  ["Lưu session/token an toàn (như HttpOnly cookie), kiểm tra điều hướng ở tầng request và xác thực phiên ngay tại nơi đọc/ghi dữ liệu.", "Store session tokens safely (such as HttpOnly cookies), handle navigation checks at the request boundary and enforce session/authorization checks inside every data read or mutation."],
+  ["Đọc cookie và xác thực phiên trên server trước khi truy cập dữ liệu riêng tư.", "Read cookies and verify the session on the server before accessing private data."],
+  "import { cookies } from 'next/headers';\nimport { redirect } from 'next/navigation';\n\nasync function getCurrentUser() {\n  const cookieStore = await cookies();\n  const sessionId = cookieStore.get('session')?.value;\n  if (!sessionId) return null;\n  return verifySession(sessionId);\n}\n\nexport default async function AccountPage() {\n  const user = await getCurrentUser();\n  if (!user) redirect('/login');\n  return <div>Account: {user.email}</div>;\n}",
+  [
+    ["HttpOnly Cookie Session", "Lưu session an toàn phía server/cookie, hạn chế rủi ro đọc token qua XSS.", "Store session state safely with HttpOnly cookies to mitigate token theft via XSS.", "await cookies()"],
+    ["Data Access Guard", "Kiểm tra phiên và phân quyền ngay tại hàm đọc/ghi dữ liệu.", "Verify authentication and authorization inside every server data/mutation helper.", "if (!user) redirect('/login');"]
+  ]
+]);
+
+A("next", 2, [
+  ["Runtime & Deployment", "Runtime & Deployment"],
+  ["Lựa chọn môi trường thực thi phù hợp cho từng route/handler và hạ tầng triển khai.", "Choose execution runtimes per route/handler and deployment targets."],
+  ["Tối ưu độ trễ khởi động, khả năng tương thích thư viện và chi phí vận hành.", "Balance cold-start latency, API compatibility and runtime cost."],
+  ["Dùng Node.js runtime khi cần đầy đủ API/thư viện Node hoặc truy cập DB; cân nhắc edge cho tác vụ nhẹ gần người dùng.", "Use Node.js runtime for full Node APIs/libraries or DB access; consider edge for lightweight nearby checks."],
+  ["Khai báo tường minh runtime cho route handler.", "Explicitly declare the runtime on a route handler."],
+  "export const runtime = 'nodejs';\n\nexport async function GET() {\n  return Response.json({ status: 'ok' });\n}",
+  [
+    ["Node.js runtime", "Hỗ trợ đầy đủ API Node.js và thư viện phía server.", "Full Node.js API and server library support.", "export const runtime = 'nodejs';"],
+    ["Edge runtime", "Khởi động nhanh gần người dùng với tập API gọn hơn.", "Low-latency isolate execution near users with a restricted API subset.", "export const runtime = 'edge';"]
+  ]
+]);
+
+A("next", 2, [
+  ["Fonts, Redirects & Metadata Files", "Fonts, Redirects & Metadata Files"],
+  ["Tối ưu font tự lưu trữ, cấu hình redirect/rewrite/header và sinh robots.ts / sitemap.ts.", "Self-host optimized fonts, configure redirects/rewrites/headers and generate robots.ts or sitemap.ts."],
+  ["Giảm layout shift do font, quản lý chuyển hướng tập trung và hỗ trợ crawler tìm kiếm.", "Prevent font layout shifts, manage redirects centrally and assist search crawlers."],
+  ["Dùng next/font để nhúng font gọn nhẹ; cấu hình next.config cho redirects/headers; thêm robots.ts và sitemap.ts.", "Use next/font for clean font loading, next.config for redirects/headers and robots.ts/sitemap.ts for SEO."],
+  ["Khai báo redirect cấu hình trong next.config.ts.", "Configure a redirect rule inside next.config.ts."],
+  "import type { NextConfig } from 'next';\n\nconst nextConfig: NextConfig = {\n  async redirects() {\n    return [{ source: '/old-blog', destination: '/blog', permanent: true }];\n  }\n};\n\nexport default nextConfig;",
+  [
+    ["next/font", "Tự tối ưu và lưu trữ font để giảm độ trễ và tránh CLS.", "Self-host and optimize fonts to cut latency and layout shift.", "import { Inter } from 'next/font/google'"],
+    ["robots.ts & sitemap.ts", "Tự động tạo file crawl và sơ đồ trang chuẩn cho công cụ tìm kiếm.", "Generate crawl rules and XML sitemaps cleanly for search engines.", "export default function sitemap() { ... }"]
+  ]
+]);
+
+var DG = {
+  "angular:Component": "Class>Template>Styles>Selector tag>DOM",
+  "angular:Data binding": "Class>{{ }} / [ ]>View>( ) event>Class",
+  "angular:Directive": "Data>@if / @for / ngClass>DOM added, removed or restyled",
+  "angular:Pipe": "Raw value>| pipe>Display value",
+  "angular:Service": "Component A + B>UserService (1 shared instance)>HTTP API",
+  "angular:Dependency Injection": "Component asks>Injector>Provider>Instance injected",
+  "angular:Routing": "URL>Router>Route match>Component>router-outlet",
+  "angular:Reactive Forms": "Input>FormControl>Validators>valid / invalid>Submit",
+  "angular:Signals": "signal()>computed()>effect() / UI",
+  "angular:RxJS & Lazy loading": "Event>pipe(operators)>Lazy route chunk>UI",
+  "angular:Lifecycle hooks": "constructor>ngOnChanges>ngOnInit>ngOnDestroy",
+  "angular:Component communication": "Parent>@Input>Child>@Output>Parent",
+  "angular:HttpClient & Interceptors": "Component>Interceptor>HttpClient>Server>Interceptor>Component",
+  "angular:Change detection": "Event / Signal>Strategy (Default / OnPush / Zoneless)>DOM",
+  "angular:NgRx & SignalStore": "Component>dispatch(Action)>Reducer / Store>Selector / Signal>UI",
+  "angular:SSR & Hydration": "Request>Server renders HTML>Browser shows HTML>JS loads>Hydration",
+  "angular:Testing": "TestBed>Create component>Detect changes>Assert DOM / E2E",
+  "angular:Advanced Signals & Hydration": "Source Signal>linkedSignal / resource>Hydrated UI",
+
+  "react:JSX, Components & Props": "JSX>jsx()>Element Tree>Props down>UI",
+  "react:State with useState": "Event>setState>Schedule re-render>New UI",
+  "react:useEffect & Lists": "Commit DOM>useEffect runs>Cleanup on unmount/deps>key reconciles list",
+  "react:Context & Custom Hooks": "Provider value>useContext / custom hook>Consumer UI",
+  "react:Optimization: memo, useMemo, useCallback": "Render>Memo / deps check>Skip or recompute>Stable UI",
+  "react:Suspense & Concurrent Rendering": "Urgent input>Priority preserved>Suspense / transition>Smooth UI",
+  "react:Forms: Controlled & Uncontrolled": "Input>State or DOM/FormData>Validation>Submit",
+  "react:useRef": "useRef>{ current }>DOM node or mutable value (no re-render)",
+  "react:useReducer": "dispatch(action)>reducer(state, action)>Next state>Re-render",
+  "react:Error Boundary": "Child throws>ErrorBoundary catches>Fallback UI",
+  "react:React Router": "URL>Router>Route match>Element + Outlet",
+  "react:State Libraries: Zustand & Redux": "Component>Action / set>Store>Subscribed slice>UI",
+  "react:Testing": "render()>Find by role>userEvent / fireEvent>Assert UI",
+  "react:useOptimistic, use() & Accessibility": "User action>Optimistic state>Server confirm>Accessible UI",
+
+  "next:File-based Routing (App Router)": "app/ folder>page.tsx + layout.tsx>URL route",
+  "next:Link & Image": "Link prefetch>Soft navigation>Image size/format>Stable layout",
+  "next:Server Components & Data Fetching": "Server Component>await server data>HTML + RSC payload>Client",
+  "next:Client Components": "'use client'>JS chunk>Hydrate>Interactive DOM",
+  "next:Server Actions & Route Handlers": "Action / route.ts>Server execution>Response / revalidate>UI",
+  "next:Revalidation & Streaming": "Initial HTML stream>Suspense fallback>Data ready>Stream chunk",
+  "next:Layouts": "Root layout>Nested layout>children>Page",
+  "next:Metadata & SEO": "metadata / generateMetadata>Merge layout + page><head> tags",
+  "next:Rendering Strategies": "Request>Static/ISR or Dynamic>HTML response",
+  "next:Middleware": "Request>middleware.ts (matcher)>redirect / rewrite / next>Route",
+  "next:Parallel & Intercepting Routes": "Layout>@slot + children>Rendered together",
+  "next:error.tsx & not-found": "Route error / notFound()>Boundary / 404 UI>reset()",
+  "next:Authentication": "Cookie / session>Verify on server>Authorized data or redirect",
+  "next:Runtime & Deployment": "Route/handler>Node.js / Edge runtime>Deploy",
+  "next:Fonts, Redirects & Metadata Files": "next/font + next.config>robots.ts / sitemap.ts>Fast SEO output",
+
+  "network:DNS, TCP/TLS & HTTP/1.1–2–3": "Domain>DNS lookup>TCP/QUIC connect>TLS 1.3>HTTP response",
+  "network:Cookie vs LocalStorage vs SessionStorage": "Data>HttpOnly Cookie / localStorage / sessionStorage>Scope & lifetime",
+  "network:CORS & Preflight (OPTIONS)": "Cross-origin request>OPTIONS preflight>Access-Control-* check>Response",
+  "network:Critical Rendering Path": "HTML + CSS>DOM + CSSOM>Render Tree>Layout>Paint>Composite",
+  "network:XSS, CSRF & Clickjacking": "Input / session / frame>Escape & SameSite & frame-ancestors>Protected app",
+  "network:Security Headers (CSP, HSTS)": "Server response>CSP + HSTS + nosniff>Browser policy enforced",
+  "network:Preload, Prefetch & HTTP Cache Validation": "Resource hint / ETag>Conditional 304 check>Faster asset reuse",
+
+  "jsts:Execution Context & Call Stack": "Global frame>Function call pushed>Return>Frame popped",
+  "jsts:Immutability & Array/Object Updates": "Current state>Spread / new array or object>Next immutable state",
+  "jsts:Event Loop: Microtask vs Macrotask": "Sync stack empty>Drain all Microtasks>Paint opportunity>Next Macrotask",
+  "jsts:Closures, this & Prototypes": "Outer scope>Closure retained>Call site determines this",
+  "jsts:Type vs Interface & Narrowing": "Union type>Branch guard (status / typeof)>Narrowed concrete type",
+  "jsts:Generics, Utility Types & unknown": "Generic <T> / Utility type>Safe compile check>Narrow unknown",
+  "jsts:Promise Combinators & AbortController": "Concurrent promises>AbortController on stale change>Clean result",
+  "jsts:Strict TypeScript, Guards & ESM": "strict mode>Type guard predicate>ES Modules tree-shaking",
+
+  "perf:Core Web Vitals (LCP, INP, CLS)": "Measure LCP / INP / CLS>Fix bottleneck>Re-measure p75",
+  "perf:HTTP Caching & Cache-Control": "Asset / HTML>Cache-Control & ETag>Cache HIT or revalidate",
+  "perf:Code Splitting & Tree-shaking": "Dynamic import + ES modules>Smaller initial bundle>Faster load",
+  "perf:Technical SEO (Metadata, Sitemap, JSON-LD)": "Indexable HTML>Canonical + meta + JSON-LD + sitemap>Search indexing",
+  "perf:Observability: RUM vs Synthetic": "Real users (RUM) + Lab checks (Synthetic)>Dashboards & alerts",
+  "perf:Error & Trace Correlation": "Client error / API call>X-Request-Id / traceId>Correlated server logs",
+  "perf:LCP, INP & CLS Playbook": "Hero media & TTFB>Short main-thread tasks>Fixed box aspect-ratio",
+
+  "ops:Lint, Format, Type-check & Lockfile": "Edit code>lint + tsc --noEmit + test>Lockfile verified",
+  "ops:Testing Pyramid (Unit, Component, E2E)": "Unit tests>Component tests>E2E browser flows",
+  "ops:CI Pipeline & Preview Deployments": "Pull Request>CI checks & build>Isolated preview URL",
+  "ops:Environment & Secret Separation": "Env config>Public client vars vs server secrets>Safe runtime",
+  "ops:Rollback, Blue-Green & Canary": "New release>Canary / Blue-Green check>Promote or Rollback",
+  "ops:Release Gates & Post-Deploy Checks": "Deploy complete>Check routes, errors & vitals>Healthy release",
+  "ops:API Mocking & Git/PR Discipline": "Mocked network boundary>Focused PR & CI checks>Safe merge"
+};
+
+/**
+ * Render an inline flow diagram for a card if available.
+ */
+function dgm(k) {
+  var s = DG[k];
+  if (!s) return "";
+  return (
+    "<p><b>" +
+    (L ? "Diagram" : "Sơ đồ minh họa") +
+    ":</b></p><div class=\"dg\">" +
+    s
+      .split(">")
+      .map(function (x, i) {
+        return (i ? "<i>→</i>" : "") + "<span>" + esc(x) + "</span>";
+      })
+      .join("") +
+    "</div>"
+  );
+}
+
+/**
+ * Render classification/variants block for a card.
+ */
+function ty(a) {
+  if (!a || !a.length) return "";
+  return (
+    "<div class=\"ty\"><p><b>" +
+    (L ? "Types and how they differ" : "Phân loại và khác biệt") +
+    " (" +
+    a.length +
+    "):</b></p>" +
+    a
+      .map(function (r) {
+        return (
+          "<p><b>" +
+          esc(r[0]) +
+          "</b>: " +
+          esc(t([r[1], r[2]])) +
+          (r[3] ? "<code>" + esc(r[3]) + "</code>" : "") +
+          "</p>"
+        );
+      })
+      .join("") +
+    "</div>"
+  );
+}
+
+/**
+ * Render a topic block (concept, levels/cards, and step-by-step flow) for a key.
+ */
+function renderTopicSection(topicKey, showTopTitle) {
+  var f = FW[topicKey];
+  if (!f) return;
+  var out = document.getElementById("out");
+
+  if (showTopTitle) {
+    var topicTitle = UI.tabs[topicKey] ? esc(t(UI.tabs[topicKey])) : esc(topicKey);
+    out.appendChild(el("h2", 0, topicTitle));
+  }
+
+  out.appendChild(el("h2", 0, esc(t(UI.c))));
+  out.appendChild(el("p", "lead", esc(t(f.c))));
+
+  out.appendChild(el("h2", 0, esc(t(UI.k))));
+  var cardIndex = 0;
+  f.lv.forEach(function (lvlGroup) {
+    out.appendChild(el("div", "lvl", esc(t(lvlGroup.l))));
+    var grid = el("div", "grid");
+    (lvlGroup.i || []).forEach(function (item) {
+      grid.appendChild(renderCard(item, cardIndex++, topicKey));
+    });
+    out.appendChild(grid);
+  });
+
+  out.appendChild(el("h2", 0, esc(t(UI.f))));
+  out.appendChild(ov(f, topicKey));
+  var flow = el("div", "flow");
+  (f.fl || []).forEach(function (stepItem, idx) {
+    if (idx) flow.appendChild(el("div", "arr", "↓"));
+    var fxEntry = (FX[topicKey] && FX[topicKey][idx]) || ["", ""];
+    var stepEl = el(
+      "div",
+      "step",
+      "<b>" +
+        (idx + 1) +
+        ". " +
+        esc(stepItem.n) +
+        (fxEntry[0] ? "<span class=\"bd\">" + esc(fxEntry[0]) + "</span>" : "") +
+        "</b><span>" +
+        esc(t(stepItem.d)) +
+        "</span><em>" +
+        (L ? "Example:" : "Ví dụ:") +
+        "</em>"
+    );
+    var stepPre = el("pre");
+    stepPre.textContent = fxEntry[1] || "";
+    stepEl.appendChild(stepPre);
+    flow.appendChild(stepEl);
+
+    var branch = BR[topicKey] && BR[topicKey][idx];
+    if (branch) {
+      flow.appendChild(el("div", "arr", "↓"));
+      flow.appendChild(brEl(branch));
+    }
+  });
+  out.appendChild(flow);
+
+  if (f.hasStructure) {
+    out.appendChild(
+      el("h2", 0, L ? "Real-world project structure" : "Cấu trúc thư mục dự án thực tế")
+    );
+    out.appendChild(fsEl(topicKey));
+  }
+}
+
+function ov(f, topicKey) {
+  var activeKey = topicKey || TAB;
+  var d = el("div");
+  var c = el("div", "chips");
+  d.appendChild(
+    el(
+      "div",
+      "lg",
+      (L
+        ? "Overview — colors show where each step runs: "
+        : "Tổng quan — màu cho biết bước chạy ở đâu: ") + Object.keys(LC).join(" · ")
+    )
+  );
+  f.fl.forEach(function (s, i) {
+    var e = el("span", "chip", i + 1 + ". " + esc(s.n));
+    e.style.setProperty("--lc", lane((FX[activeKey] && FX[activeKey][i] ? FX[activeKey][i][0] : "")));
+    if (i) c.appendChild(document.createTextNode("→"));
+    c.appendChild(e);
+  });
+  d.appendChild(c);
+  return d;
+}
+
+function brEl(b) {
+  var d = el("div", "br", "<b>◆ " + esc(t(b.q)) + "</b>");
+  var g = el("div", "cols");
+  [b.a, b.b].forEach(function (x) {
+    g.appendChild(el("div", 0, "<b>" + esc(t(x[0])) + "</b>" + esc(t(x[1]))));
+  });
+  d.appendChild(g);
+  return d;
+}
+
+var FSN = {
+  angular: [
+    "Cấu trúc theo tính năng (feature-based): core dùng một lần, shared dùng chung, mỗi feature tự chứa và có thể lazy load.",
+    "Feature-based layout: core is used once, shared is reused, and each feature is self-contained and lazy-loadable."
+  ],
+  react: [
+    "React không áp đặt cấu trúc; mô hình phổ biến (Vite + feature-based) tách rõ features nghiệp vụ với components/ui, hooks, services và utils dùng chung.",
+    "React imposes no rigid structure; a common Vite feature-based layout separates domain features from shared components/ui, hooks, services and utils."
+  ],
+  next: [
+    "Thư mục app/ quy định route (App Router); phần còn lại tách ra components, lib, actions và hooks để giữ route mỏng và dễ bảo trì.",
+    "The app/ folder defines routes (App Router); everything else lives in components, lib, actions and hooks to keep routes thin and maintainable."
+  ]
+};
+
+var FS = {
+  angular: [
+    ["src/", "Mã nguồn", "Source code"],
+    ["  main.ts", "Điểm khởi động ứng dụng (bootstrapApplication)", "App entry point (bootstrapApplication)"],
+    ["  styles.scss", "Style toàn cục và biến giao diện", "Global styles and theme tokens"],
+    ["  environments/", "Cấu hình môi trường dev và prod", "Dev and prod environment configs"],
+    ["  app/", "Thư mục chính của ứng dụng", "Main application folder"],
+    ["    app.component.ts", "Component gốc", "Root component"],
+    ["    app.config.ts", "provideRouter, provideHttpClient, provideClientHydration...", "Global providers configuration"],
+    ["    app.routes.ts", "Định tuyến gốc & lazy loading tới features", "Root routes & lazy loading into features"],
+    ["    core/", "Singleton dùng một lần cho toàn app (guards, interceptors, services)", "App-wide singletons (guards, interceptors, services)"],
+    ["    shared/", "Thành phần tái sử dụng (components, directives, pipes)", "Reusable pieces (components, directives, pipes)"],
+    ["    layout/", "Khung bố cục (main-layout, auth-layout)", "Layout shells (main-layout, auth-layout)"],
+    ["    features/", "Mỗi nghiệp vụ một thư mục, lazy load theo route", "One folder per business feature, lazy-loaded per route"],
+    ["      products/", "Ví dụ một tính năng", "Example feature"],
+    ["        pages/", "Component gắn với route (product-list, product-detail)", "Route-bound page components"],
+    ["        components/", "Component riêng của feature", "Components private to the feature"],
+    ["        services/", "product.service.ts gọi API & quản lý trạng thái feature", "product.service.ts for API & feature state"],
+    ["        models/", "Kiểu dữ liệu/model của feature", "Feature TypeScript models/types"],
+    ["        products.routes.ts", "Khai báo route riêng của feature", "Feature route definitions"],
+    ["public/", "Tài nguyên tĩnh phục vụ nguyên trạng", "Static public assets"],
+    ["angular.json", "Cấu hình build, dev server, lint và test", "Build, serve, lint and test configuration"],
+    ["tsconfig.json", "Cấu hình TypeScript", "TypeScript configuration"]
+  ],
+  react: [
+    ["src/", "Mã nguồn", "Source code"],
+    ["  main.tsx", "Điểm vào, mount <App/> vào #root", "Entry point, mounts <App/> into #root"],
+    ["  App.tsx", "Component gốc, providers và layout tổng", "Root component, providers and top shell"],
+    ["  router/", "Khai báo route và route guards", "Route definitions and route guards"],
+    ["  pages/", "Các trang chính: HomePage.tsx, ProductsPage.tsx", "Page views: HomePage.tsx, ProductsPage.tsx"],
+    ["  features/", "Code tổ chức theo nghiệp vụ", "Code grouped by business feature"],
+    ["    auth/", "Ví dụ tính năng xác thực", "Example auth feature"],
+    ["      components/", "LoginForm.tsx", "LoginForm.tsx"],
+    ["      hooks/", "useAuth.ts", "useAuth.ts"],
+    ["      api.ts", "Gọi API của feature", "Feature API calls"],
+    ["      types.ts", "Kiểu dữ liệu của feature", "Feature TypeScript types"],
+    ["  components/ui/", "Component UI dùng chung: Button, Modal, Input", "Shared UI primitives: Button, Modal, Input"],
+    ["  hooks/", "Custom hook dùng chung: useDebounce, useLocalStorage", "Shared custom hooks: useDebounce, useLocalStorage"],
+    ["  services/", "HTTP client chung (fetch/axios wrapper)", "Shared HTTP client wrapper"],
+    ["  store/", "Store trạng thái toàn cục (nếu cần)", "Global state store (if needed)"],
+    ["  utils/ types/", "Hàm tiện ích và kiểu dữ liệu dùng chung", "Shared utility helpers and TS types"],
+    ["  assets/", "Ảnh, icon, font được import qua bundler", "Bundled assets (images, icons, fonts)"],
+    ["public/", "File tĩnh phục vụ nguyên trạng", "Static files served as is"],
+    [".env", "Biến môi trường (VITE_API_URL)", "Environment variables (VITE_API_URL)"],
+    ["vite.config.ts package.json", "Cấu hình Vite và danh sách thư viện", "Vite config and package dependencies"]
+  ],
+  next: [
+    ["app/", "Thư mục route (App Router)", "Route folder (App Router)"],
+    ["  layout.tsx page.tsx", "Layout gốc và trang chủ /", "Root layout and home page /"],
+    ["  loading.tsx error.tsx not-found.tsx", "Loading fallback, error boundary, trang 404", "Loading fallback, error boundary, 404 page"],
+    ["  (marketing)/", "Route group: trang giới thiệu, không đổi URL", "Route group: marketing pages, no URL segment"],
+    ["  (dashboard)/", "Route group có layout riêng cho khu vực đăng nhập", "Route group with dedicated layout for signed-in area"],
+    ["    products/[id]/page.tsx", "Route động /products/123", "Dynamic route /products/123"],
+    ["  api/health/route.ts", "Route Handler cho API / webhook", "Route Handler for APIs or webhooks"],
+    ["components/", "Component giao diện", "UI components"],
+    ["  ui/ features/", "Button, Modal; ProductCard, CartButton", "Button, Modal; ProductCard, CartButton"],
+    ["lib/", "Logic server & tiện ích dùng chung (db.ts, auth.ts)", "Shared server logic & utilities (db.ts, auth.ts)"],
+    ["actions/", "Server Actions ('use server', ví dụ postActions.ts)", "Server Actions ('use server', e.g., postActions.ts)"],
+    ["hooks/ types/", "Client hooks và kiểu TypeScript", "Client hooks and TypeScript types"],
+    ["public/", "Ảnh, favicon, robots.txt, sitemap.xml", "Images, favicon, robots.txt, sitemap.xml"],
+    ["middleware.ts", "Chạy trước route (redirect, headers, matcher)", "Runs before routes (redirect, headers, matcher)"],
+    ["next.config.ts", "Cấu hình Next.js (images, redirects, headers)", "Next.js config (images, redirects, headers)"],
+    [".env.local", "Bí mật server; chỉ biến NEXT_PUBLIC_* lộ ra client", "Server secrets; only NEXT_PUBLIC_* exposed to client"]
+  ]
+};
+
+function fsEl(k) {
+  var d = el("div");
+  var r = FSN[k] || ["", ""];
+  d.appendChild(el("p", "tn", esc(t(r))));
+  var w = el("div", "tree");
+  (FS[k] || []).forEach(function (x) {
+    var q = el("div", "tr");
+    var c = el("code");
+    c.textContent = x[0];
+    q.appendChild(c);
+    q.appendChild(el("span", 0, esc(t([x[1], x[2]]))));
+    w.appendChild(q);
+  });
+  d.appendChild(w);
+  return d;
+}
+
+/**
+ * Render an individual knowledge card safely.
+ */
+function renderCard(item, idx, tabKey) {
+  var safeItem = item || {};
+  var titleArr = Array.isArray(safeItem.t) ? safeItem.t : ["", ""];
+  var baseDesc = safeItem.d != null ? safeItem.d : "";
+  var extraList = Array.isArray(safeItem.x) ? safeItem.x : (EX[tabKey] && Array.isArray(EX[tabKey][idx]) ? EX[tabKey][idx] : []);
+  var labels = [
+    ["Khái niệm", "Concept"],
+    ["Mục đích", "Purpose"],
+    ["Cách hoạt động", "How it works"],
+    ["Cách dùng", "Usage"]
+  ];
+  var fields = [baseDesc].concat(extraList);
+  var ctKey = tabKey + "-" + idx;
+  var tyData = safeItem.ty != null ? safeItem.ty : (TY[tabKey] ? TY[tabKey][idx] : null);
+  var ctData = safeItem.ct != null ? safeItem.ct : (CT ? CT[ctKey] : null);
+
+  var cardHtml =
+    "<h3>" +
+    esc(t(titleArr)) +
+    "</h3>" +
+    fields
+      .map(function (s, k) {
+        if (s == null || s === "") return "";
+        var lbl = labels[k] ? esc(t(labels[k])) + ": " : "";
+        return "<p><b>" + lbl + "</b>" + esc(t(s)) + "</p>";
+      })
+      .join("") +
+    dgm(tabKey + ":" + (titleArr[1] || titleArr[0] || "")) +
+    ty(tyData) +
+    tbf(ctData) +
+    "<p><b>" +
+    (L ? "Example" : "Ví dụ minh họa") +
+    ":</b></p>";
+
+  var card = el("div", "card", cardHtml);
+  var pre = el("pre");
+  pre.textContent = safeItem.code != null ? String(safeItem.code) : "";
+  card.appendChild(pre);
+  return card;
+}
+
+/**
+ * Render the active tab into <main id="out">.
+ */
+function render() {
+  document.documentElement.lang = L ? "en" : "vi";
+  document.getElementById("ttl").textContent = t(UI.title);
+  document.getElementById("lv").setAttribute("aria-pressed", String(L === 0));
+  document.getElementById("le").setAttribute("aria-pressed", String(L === 1));
+
+  var dark = root.dataset.theme
+    ? root.dataset.theme === "dark"
+    : matchMedia("(prefers-color-scheme: dark)").matches;
+  document.getElementById("th").textContent = dark ? "☀ Light" : "🌙 Dark";
+
+  var nav = document.getElementById("nav");
+  nav.innerHTML = "";
+  Object.keys(UI.tabs).forEach(function (k) {
+    var b = el("button", k === TAB ? "on" : "", esc(t(UI.tabs[k])));
+    b.setAttribute("role", "tab");
+    b.setAttribute("aria-selected", String(k === TAB));
+    b.onclick = function () {
+      TAB = k;
+      render();
+      scrollTo(0, 0);
+    };
+    nav.appendChild(b);
+  });
+
+  var out = document.getElementById("out");
+  out.innerHTML = "";
+
+  var acc =
+    TAB === "compare"
+      ? "--cmp"
+      : TAB === "general"
+      ? "--gen"
+      : (FW[TAB] ? FW[TAB].col : "--ang");
+  root.style.setProperty("--acc", "var(" + acc + ")");
+
+  if (TAB === "compare") {
+    out.appendChild(el("h2", 0, esc(t(UI.tabs.compare)) + ": Angular · ReactJS · Next.js"));
+    var tb =
+      "<table><thead><tr>" +
+      CMP.h
+        .map(function (h) {
+          return "<th>" + esc(t(h)) + "</th>";
+        })
+        .join("") +
+      "</tr></thead><tbody>";
+    CMP.r.forEach(function (r) {
+      tb +=
+        "<tr>" +
+        r
+          .map(function (c) {
+            return "<td>" + esc(t(c)) + "</td>";
+          })
+          .join("") +
+        "</tr>";
+    });
+    out.appendChild(el("div", "tw", tb + "</tbody></table>"));
+    out.appendChild(el("h2", 0, L ? "When to choose which" : "Nên chọn cái nào"));
+    out.appendChild(el("p", "lead", esc(t(CMP.n[0]))));
+    return;
+  }
+
+  if (TAB === "general") {
+    var generalTopics = [
+      { key: "network", title: ["1. Mạng & Bảo mật", "1. Network & Security"] },
+      { key: "jsts", title: ["2. JS & TypeScript", "2. JS & TypeScript"] },
+      { key: "perf", title: ["3. Hiệu năng, SEO & Quan sát", "3. Performance, SEO & Observability"] },
+      { key: "ops", title: ["4. Quy trình, Test & Deploy", "4. Workflow, Testing & Deployment"] }
+    ];
+    generalTopics.forEach(function (grp) {
+      out.appendChild(el("h2", 0, esc(t(grp.title))));
+      renderTopicSection(grp.key, false);
+    });
+    return;
+  }
+
+  renderTopicSection(TAB, false);
+}
+
+document.getElementById("lv").onclick = function () {
+  L = 0;
+  store("lang", "0");
+  render();
+};
+
+document.getElementById("le").onclick = function () {
+  L = 1;
+  store("lang", "1");
+  render();
+};
+
+document.getElementById("th").onclick = function () {
+  var dark = root.dataset.theme
+    ? root.dataset.theme === "dark"
+    : matchMedia("(prefers-color-scheme: dark)").matches;
+  root.dataset.theme = dark ? "light" : "dark";
+  store("theme", root.dataset.theme);
+  render();
+};
+
+if (load("lang") === "1") L = 1;
+var savedTheme = load("theme");
+if (savedTheme) root.dataset.theme = savedTheme;
+
+render();
+</script>
+</body>
+</html>
